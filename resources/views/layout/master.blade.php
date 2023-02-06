@@ -28,7 +28,7 @@
             <!-- User Menu-->
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                    <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fa fa-sign-out fa-lg "></i> Deconnexion</a></li>
+                    <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fa fa-sign-out fa-lg"></i> Deconnexion</a></li>
                 </ul>
             </li>
         </ul>
@@ -43,16 +43,11 @@
             </div>
         </div>
         <ul class="app-menu">
-            <li ><a class="app-menu__item {{(request()->segment(1)== 'dashboard') ? 'active': ''}}" href="{{route('dashbord.index')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Tableau de bord</span></a></li>
-            <li class="dropdown">
-                <a class="app-nav__item active" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="app-menu__icon fa fa-bell"></i><span class="app-menu__label">Demandes</a>
-                <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                     <li ><a class="app-menu__item {{ (request()->segment(1)== 'nouveaux') ? 'active' : ''}}" href="{{route('admins.demande')}}"><i class="app-menu__icon fa fa-bell"></i><span class="app-menu__label">Nouveaux</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
-                     <li><a class="app-menu__item {{(request()->segment(1)== 'traiter') ? 'active': ''}}" href="{{route('admins.demande.liste')}}"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Traités</span></a></li>
-                </ul>
-            </li>
-
-            <li><a class="app-menu__item {{(request()->segment(1)== 'users') ? 'active': ''}}" href="{{route('admins.utilisateur')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Gestion des utilisateurs</span></a></li>
+            <li><a class="app-menu__item active" href="{{route('dashbord.index')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Tableau de bord</span></a></li>
+            <li><a class="app-menu__item " href="{{route('admins.presentation')}}"><i class="app-menu__icon fa fa-calculator"></i><span class="app-menu__label">Presentations</span></a></li>
+            <li><a class="app-menu__item " href="{{route('admins.demande')}}"><i class="app-menu__icon fa fa-bell"></i><span class="app-menu__label">Alerte Demandes</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
+            <li><a class="app-menu__item " href="{{route('admins.demande.liste')}}"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Liste des demandeurs</span></a></li>
+            <li><a class="app-menu__item " href="{{route('admins.utilisateur')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Gestion des utilisateurs</span></a></li>
         </ul>
     </aside>
     @yield('content')

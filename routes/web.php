@@ -38,8 +38,14 @@ Route::group(["namespace" => "front"], function(){
 Route::group(["namespace" => "admins"], function(){
     Route::get('/dashboard', [DashbordController::class, 'index'])->name("dashbord.index")->middleware("auth");
 
-    Route::get('/nouveaux', [DemandeController::class, 'index'])->name("admins.demande")->middleware("auth");
-    Route::get('/traiter', [DemandeController::class, 'index'])->name("admins.demande.liste")->middleware("auth");
+    Route::get('/presentation', [PresentationController::class, 'index'])->name("admins.presentation")->middleware("auth");
+    Route::get('/presentation/{id}', [PresentationController::class, 'show'])->name("admins.presentation.show")->middleware("auth");
+    Route::post('/presentation', [PresentationController::class, 'store'])->name("admins.presentation.store")->middleware("auth");
+    Route::delete('/presentation/{id}', [PresentationController::class, 'destroy'])->name("admins.presentation.destroy")->middleware("auth");
+    Route::put('/presentation/{id}', [PresentationController::class, 'update'])->name("admins.presentation.update")->middleware("auth");
+
+    Route::get('/demandes', [DemandeController::class, 'index'])->name("admins.demande")->middleware("auth");
+    Route::get('admin/demande/liste', [DemandeController::class, 'liste'])->name("admins.demande.liste")->middleware("auth");
     Route::get('/demande/{id}', [DemandeController::class, 'show'])->name("admins.demande.show")->middleware("auth");
     Route::put('/demande/{id}', [DemandeController::class, 'update'])->name("admins.demande.update")->middleware("auth");
 

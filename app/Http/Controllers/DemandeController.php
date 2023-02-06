@@ -14,22 +14,18 @@ class DemandeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $segments =request()->segment(1);
-        if($segments == "nouveaux"){
-            $demandeNotif=new NotificationController();
-            $count_demande=$demandeNotif->compteDemande();
-            $demande=User::where('demande',1)->where('actifs',0)->orderBy('id','DESC')->get();
-            return view('admin.demande.index',compact('demande','count_demande','segments'));
-        }
-        if($segments == "traiter"){
-            $demandeNotif=new NotificationController();
-            $count_demande=$demandeNotif->compteDemande();
-            $demande=User::where('demande',1)->where('actifs',1)->orderBy('id','DESC')->get();
-            return view('admin.demande.index',compact('demande','count_demande','segments'));
-        }
-
+        $demandeNotif=new NotificationController();
+        $count_demande=0;//$demandeNotif->compteDemande();
+        $demande=Demande::orderBy('id','DESC')->get();
+        return view('admin.demande.index',compact('demande','count_demande'));
+    }
+    public function liste(){
+        $demandeNotif = new NotificationController();
+        $count_demande = 0; //$demandeNotif->compteDemande();
+        $demande = Demande::orderBy('id','DESC')->get();
+        return view('admin.demande.liste',compact('demande','count_demande'));
     }
 
     /**
