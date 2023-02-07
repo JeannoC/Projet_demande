@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
-use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
-class RoleSeeder extends Seeder
+use Illuminate\Database\Seeder;
+
+class PermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,23 +16,17 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-
-        Role::create([
-            'name'=>'admin'
-        ]);
-        Role::create([
-            'name'=>'pdg'
-        ]);
-        Role::create([
-            'name'=>'utilisateur'
+        Permission::create([
+            'name'=>'valider'
         ]);
         $users=User::create([
-            'email'=>'admin@admin.com',
-            'name'=>'admin',
-            'prenom'=>'admin',
+            'email'=>'dg@admin.com',
+            'name'=>'dg',
+            'prenom'=>'dg',
             'password'=>bcrypt(1234),
             'statuts'=>'1'
         ]);
+        $users->attachPermission('valider');
         $users->attachRole('admin');
     }
 }

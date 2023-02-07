@@ -18,7 +18,6 @@ class CreateDemandesTable extends Migration
             $table->string('type_demande')->default('');
             $table->string('prenom')->default('');
             $table->string('name')->default('');
-            $table->string('nom')->default('');
             $table->string('genre')->default('');
             $table->string('date_naissance')->default('');
             $table->string('lieu_naissance')->default('');
@@ -28,10 +27,11 @@ class CreateDemandesTable extends Migration
             $table->string('photo')->default('');
             $table->string('photo_signature')->default('');
 
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('telephone')->default('');
-            $table->string('password');
+            $table->string('actifs')->default('0');
             $table->integer('demande')->default('1');
+            $table->integer('prevalitation')->default('0');
             $table->rememberToken();
             $table->timestamps();
 

@@ -17,8 +17,9 @@
   background-color: #eeeeee;
 }
 
-.file-upload{
+.file-upload {
   background-color: #ffffff;
+  width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -27,11 +28,11 @@
   width: 100%;
   margin: 0;
   color: #fff;
-  background: #1FB264;
+  background: #3ba1d8;
   border: none;
   padding: 10px;
   border-radius: 4px;
-  border-bottom: 4px solid #15824B;
+  border-bottom: 4px solid #3ba1d8;
   transition: all .2s ease;
   outline: none;
   text-transform: uppercase;
@@ -39,7 +40,7 @@
 }
 
 .file-upload-btn:hover {
-  background: #1AA059;
+  background: #022f48;
   color: #ffffff;
   transition: all .2s ease;
   cursor: pointer;
@@ -71,7 +72,40 @@
   cursor: pointer;
 }
 
+.file-upload-inputs {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
 
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 4px dashed #3eb1c7;
+  position: relative;
+}
+
+.image-upload-wraps {
+  margin-top: 20px;
+  border: 4px dashed #3eb1c7;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color:  #58bcef;
+  border: 4px dashed #ffffff;
+}
+
+.image-dropping,
+.image-upload-wraps:hover {
+  background-color: #58bcef;
+  border: 4px dashed #ffffff;
+}
 
 .image-title-wrap {
   padding: 0 15px 15px 15px;
@@ -85,22 +119,22 @@
 .drag-text h3 {
   font-weight: 100;
   text-transform: uppercase;
-  color: #15824B;
+  color: #42a6bd;
   padding: 60px 0;
 }
 
 .file-upload-image {
-  max-height: 100px;
-  max-width: 100px;
-  margin-right: 500px;
-  padding: 5px;
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
 }
 
 .file-upload-images {
-  max-height: 100px;
-  max-width: 100px;
-  margin-right: 500px;
-  padding: 5px;
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
 }
 
 .remove-image {
@@ -258,30 +292,36 @@
                                 <option value="carte">Carte</option>
                             </select>
                         </div>
-                            <div class="file-upload form-group col-md-6">
-                                <label >Photo*</I></label>
-                                <label for="images"  onclick="$('.file-upload-inputt').trigger( 'click' )" class="form-control">
-                                    <div class="image-upload-wrap">
-                                        <input class="file-upload-inputt" type='file' onchange="readURL(this);" accept="image/*" name="image_signature"/>
-                                      </div>
-                                </label>
-
-                                <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" />
+                        <div class="file-upload col-6">
+                            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ajout Photo</button>
+                            <div class="image-upload-wrap">
+                              <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                              <div class="drag-text">
+                                <h3>Faites glisser et déposez un fichier ou sélectionnez ajouter une image</h3>
+                              </div>
+                            </div>
+                            <div class="file-upload-content">
+                              <img class="file-upload-image" src="#" alt="your image" />
+                              <div class="image-title-wrap">
+                                <button type="button" onclick="removeUpload()" class="remove-image">Suprimer <span class="image-title">Uploaded Image</span></button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="file-upload col-6">
+                              <button class="file-upload-btn" type="button" onclick="$('.file-upload-inputs').trigger( 'click' )">Ajout Photo Signature</button>
+                              <div class="image-upload-wraps">
+                                <input class="file-upload-inputs" type='file' onchange="readURLS(this);" accept="image/*" />
+                                <div class="drag-text">
+                                  <h3>Faites glisser et déposez un fichier ou sélectionnez ajouter une image</h3>
                                 </div>
                               </div>
-                              <div class="file-upload form-group col-md-6">
-                                <label >Photo Signature*</I></label>
-                                <label for="images_signature"  onclick="$('.file-upload-inputs').trigger( 'click' )" class="form-control">
-                                    <div class="image-upload-wraps">
-                                        <input class="file-upload-inputs" type='file' onchange="readURLS(this);" accept="image/*" name="images_signature"/>
-                                      </div>
-                                </label>
-
-                                <div class="file-upload-contents">
-                                    <img class="file-upload-images" src="#" alt="your image" />
+                              <div class="file-upload-contents">
+                                <img class="file-upload-images" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                  <button type="button" onclick="removeUploads()" class="remove-image">Suprimer <span class="image-title">Uploaded Image</span></button>
                                 </div>
                               </div>
+                            </div>
                         <div class="form-group col-md-3">
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>

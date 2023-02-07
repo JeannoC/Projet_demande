@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePresentationsTable extends Migration
+class CreatePreValidationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePresentationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('presentations', function (Blueprint $table) {
+        Schema::create('pre_validations', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->text('description');
-            $table->string('images');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('demande_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePresentationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('presentations');
+        Schema::dropIfExists('pre_validations');
     }
 }

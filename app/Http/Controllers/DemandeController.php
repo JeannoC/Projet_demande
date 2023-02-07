@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Demande;
 use App\Http\Controllers\NotificationController;
 
 class DemandeController extends Controller
@@ -13,18 +14,30 @@ class DemandeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $demandeNotif=new NotificationController();
-        $count_demande=$demandeNotif->compteDemande();
-        $demande=User::where('demande',1)->where('actifs',0)->orderBy('id','DESC')->get();
-        return view('admin.demande.index',compact('demande','count_demande'));
+        $segments =request()->segment(1);
+        if($segments == "nouveaux"){
+            $demandeNotif=new NotificationController();
+            $count_demande=$demandeNotif->compteDemande();
+            $demande=Demande::where('demande',1)->where('actifs',0)->orderBy('id','DESC')->get();
+            return view('admin.demande.index',compact('demande','count_demande','segments'));
+        }elseif($segments == "traiter"){
+            $demandeNotif=new NotificationController();
+            $count_demande=$demandeNotif->compteDemande();
+            $demande=Demande::where('demande',1)->where('actifs',1)->orderBy('id','DESC')->get();
+            return view('admin.demande.index',compact('demande','count_demande','segments'));
+        }
+
     }
-    public function liste(){
-        $demandeNotif=new NotificationController();
-        $count_demande=$demandeNotif->compteDemande();
-        $demande=User::where('demande',1)->where('actifs',1)->orderBy('id','DESC')->get();
-        return view('admin.demande.liste',compact('demande','count_demande'));
+
+
+    public function prevalidation(Request $request)
+    {
+            $demandeNotif=new NotificationController();
+            $count_demande=$demandeNotif->compteDemande();
+            $demande=Demande::where('demande',1)->where('prevalidation',1)->orderBy('id','DESC')->get();
+            return view('admin.preValidation.preValidation',compact('demande','count_demande'));
     }
 
     /**
@@ -87,11 +100,11 @@ class DemandeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    /* public function update(Request $request, $id)
     {
         $identifiant=rand(111111000,999999000);
         $users=User::FindOrFail($id);
-        $users->actifs=1;
+        $users->prevalitation=1;
         $users->identifiant=$identifiant;
         $users->update();
 
@@ -101,6 +114,16 @@ class DemandeController extends Controller
         return redirect()->route('mailing',$users->id);
 
 
+    } */
+
+
+    public function update(Request $request, $id)
+    {
+        $users=User::FindOrFail($id);
+        $users->Demande->prevalitation=1;
+        $users->update();
+
+        return back();
     }
 
     /**

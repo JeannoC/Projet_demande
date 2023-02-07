@@ -17,19 +17,19 @@
             <form action="{{route('users.store')}}" method="post" class="row">
             @csrf
                 <div class="form-group col-md-3">
-                    <label for="">Nom</label>
+                    <label for="">Nom Complet</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name"  placeholder="Saisir nom complet">
                     @error('name')<span class="text text-danger">{{$message}}</span>@enderror
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Prenom</label>
-                    <input type="text" class="form-control @error('prenom') is-invalid @enderror" value="{{ old('prenom') }}" name="prenom"  placeholder="Saisir prenom">
-                    @error('contact')<span class="text text-danger">{{$message}}</span>@enderror
                 </div>
                 <div class="form-group col-md-3">
                     <label for="">Entrer L'Email</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email"  placeholder="Saisir email">
                     @error('email')<span class="text text-danger">{{$message}}</span>@enderror
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="">Numéro de téléphone</label>
+                    <input type="text" class="form-control @error('contact') is-invalid @enderror" value="{{ old('contact') }}" name="contact"  placeholder="Saisir contact">
+                    @error('contact')<span class="text text-danger">{{$message}}</span>@enderror
                 </div>
                 <div class="form-group col-md-3">
                     <label for="">Mot de passe</label>
@@ -48,8 +48,8 @@
                     <thead>
                         <tr>
                             <th>N°</th>
-                            <th>NOM</th>
-                            <th>PRENOM</th>
+                            <th>NOM COMPLET</th>
+                            <th>CONTACT</th>
                             <th>EMAIL</th>
                             <th>ACTIONS</th>
                         </tr>
@@ -60,7 +60,7 @@
                         <tr>
                             <td>{{$id++}}</td>
                             <td>{{$user->name}}</td>
-                            <td>{{$user->prenom}}</td>
+                            <td>{{$user->telephone}}</td>
                             <td>{{$user->email}}</td>
                             <td class="text-xs-center">
                                 @if($user->statuts==1)

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Demande;
 use App\Http\Controllers\NotificationController;
 class DashbordController extends Controller
 {
@@ -14,7 +14,7 @@ class DashbordController extends Controller
      */
     public function index()
     {
-        $count_demande=User::where('demande',1)->count();
+        $count_demande=Demande::where('demande',1)->count();
 
         $demandeNotif=new NotificationController();
         $count_demande=$demandeNotif->compteDemande();

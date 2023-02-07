@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Demande;
 class NotificationController extends Controller
 {
     public function compteDemande(){
-        $demande=User::where('demande',1)->where('actifs',0)->count();
+        $demande=Demande::where('demande',1)->where('actifs',0)->count();
         return $demande;
     }
 }
