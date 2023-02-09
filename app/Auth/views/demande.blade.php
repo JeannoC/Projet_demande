@@ -277,6 +277,11 @@
                             <input type="text" value="" name="lieu_naissance" class="form-control  @error('lieu_naissance') is-invalid @enderror">
                             @error('lieu_naissance')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
+                        <div class="form-group col-md-6">
+                            <label>Telephone*</label>
+                            <input type="text" value="" name="telephone" class="form-control  @error('telephone') is-invalid @enderror">
+                            @error('telephone')<span class="text text-danger">{{$message}}</span>@enderror
+                        </div>
                         <div class="from-group col-md-6">
                             <label for="genre">Genre*</label>
                             <select class="form-control" name="genre" id="genre">
@@ -284,7 +289,7 @@
                                 <option value="feminin">Feminin</option>
                             </select>
                         </div>
-                        <div class="from-group col-md-12">
+                        <div class="from-group col-md-6">
                             <label for="type_demande">Type de demande</label>
                             <select class="form-control" name="type_demande" id="type_demande">
                                 <option value="laisser-passer">Laisser passer</option>
@@ -295,7 +300,7 @@
                         <div class="file-upload col-6">
                             <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ajout Photo</button>
                             <div class="image-upload-wrap">
-                              <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                              <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="images"/>
                               <div class="drag-text">
                                 <h3>Faites glisser et déposez un fichier ou sélectionnez ajouter une image</h3>
                               </div>
@@ -310,7 +315,7 @@
                           <div class="file-upload col-6">
                               <button class="file-upload-btn" type="button" onclick="$('.file-upload-inputs').trigger( 'click' )">Ajout Photo Signature</button>
                               <div class="image-upload-wraps">
-                                <input class="file-upload-inputs" type='file' onchange="readURLS(this);" accept="image/*" />
+                                <input class="file-upload-inputs" type='file' onchange="readURLS(this);" accept="image/*" name="image_signature"/>
                                 <div class="drag-text">
                                   <h3>Faites glisser et déposez un fichier ou sélectionnez ajouter une image</h3>
                                 </div>

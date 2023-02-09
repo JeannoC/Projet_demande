@@ -12,9 +12,6 @@ class Demande extends Model
 {
     use HasFactory;
 
-    public function pre_validations(){
-        return $this->HasMany(PreValidation::class);
-    }
 
     public function user()
     {

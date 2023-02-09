@@ -16,14 +16,18 @@ class AuthController extends Controller
        return view('Auth::login');
     }
 
-    public function profils()
+    public function file(){
+        return view('Auth::profile');
+    }
+
+/*     public function profils()
     {
         $idUsers=Auth::user()->id;
 
         $UsersInfos=Auth::user();
 
         return view('Auth::profils');
-    }
+    } */
 
     public function login(Request $request)
     {
@@ -44,12 +48,11 @@ class AuthController extends Controller
             {
                 return redirect()->intended('/dashboard');
             }
-            // toastr()->error('Accès refusé!!!','Alert');
+
             return redirect()->back();
         }else{
             Session::flash('error',"Identifiant ou mot de passe incorrect");
         }
-        // toastr()->info('Téléphone ou mot de passe incorrect!!!','Information');
 
         $verifyprofile = User::where('email', $request->email)
                                     ->where('statuts', 0)

@@ -46,7 +46,7 @@
                                     <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info"><i class="fa fa-folder-open"></i></a>
                                 </td>
                                 <td>
-                                    <form action="{{route('admins.demande.update',$demand->id)}}" method="post">
+                                    <form action="{{route('admins.demande.updatevalidation',$demand->id)}}" method="post">
                                         @csrf
                                         {{method_field('put')}}
                                         <button class="btn btn-info" type="submit">Valider</button>

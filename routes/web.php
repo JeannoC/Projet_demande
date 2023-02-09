@@ -37,12 +37,11 @@ Route::group(["namespace" => "front"], function(){
 
 Route::group(["namespace" => "admins"], function(){
     Route::get('/dashboard', [DashbordController::class, 'index'])->name("dashbord.index")->middleware("auth");
-    Route::get('/profile',[FrontedController::class,'file'])->name('profile')->middleware("auth");
-
     Route::get('/nouveaux', [DemandeController::class, 'index'])->name("admins.demande")->middleware("auth");
     Route::get('/traiter', [DemandeController::class, 'index'])->name("admins.demande.liste")->middleware("auth");
     Route::get('/demande/{id}', [DemandeController::class, 'show'])->name("admins.demande.show")->middleware("auth");
     Route::put('/demande/{id}', [DemandeController::class, 'update'])->name("admins.demande.update")->middleware("auth");
+    Route::put('/demandevalidation/{id}', [DemandeController::class, 'updatevalidation'])->name("admins.demande.updatevalidation")->middleware("auth");
     Route::get('/preValidation',[DemandeController::class, 'preValidation'])->name('admins.preValidation')->middleware("auth");
 
 
@@ -63,7 +62,7 @@ Route::group(["namespace" => "Auth"], function(){
     Route::get('/register',[UtilisateurController::class, 'inscription'])->name('register.incription');
     Route::post('/register',[AuthController::class,'create'])->name('register');
     Route::get('/logout',[AuthController::class,'logout'])->name('logout')->middleware("auth");
-    Route::get('/profile',[FrontedController::class,'file'])->name('profile')->middleware("auth");
-    Route::post('/createdemande/{id}', [AuthController::class, 'create_demande'])->name("create_demande")->middleware("auth");
+    Route::get('/profile',[AuthController::class,'file'])->name('profile')->middleware("auth");
+    Route::post('/createdemande/{id}', [DemandeController::class, 'store'])->name("create_demande")->middleware("auth");
     Route::get('/adddemande',[AuthController::class,'adddemande'])->name('adddemande')->middleware("auth");
 });
