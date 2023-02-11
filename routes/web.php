@@ -63,6 +63,6 @@ Route::group(["namespace" => "Auth"], function(){
     Route::post('/register',[AuthController::class,'create'])->name('register');
     Route::get('/logout',[AuthController::class,'logout'])->name('logout')->middleware("auth");
     Route::get('/profile',[AuthController::class,'file'])->name('profile')->middleware("auth");
-    Route::post('/createdemande/{id}', [DemandeController::class, 'store'])->name("create_demande")->middleware("auth");
+    Route::post('/createdemande',[DemandeController::class, 'store'])->name("create_demande")->middleware("auth");
     Route::get('/adddemande',[AuthController::class,'adddemande'])->name('adddemande')->middleware("auth");
 });

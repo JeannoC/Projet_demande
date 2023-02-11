@@ -10,7 +10,7 @@ class UtilisateurController extends Controller
 {
     public function index()
     {
-        $users=User::where('type_demande',"")->get();
+        $users=User::all();
         $demandeNotif=new NotificationController();
         $count_demande=$demandeNotif->compteDemande();
         return view('admin.utilisateurs.index',compact('users','count_demande'));
@@ -30,7 +30,6 @@ class UtilisateurController extends Controller
             $user->name=$request->name;
             $user->prenom=$request->prenom;
             $user->email=$request->email;
-            $user->avatar="avatar.jpg";
             $user->password=bcrypt($request->password);
             $user->save();
             $user->attachRole('admin');

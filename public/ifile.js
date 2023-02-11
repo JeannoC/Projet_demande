@@ -61,7 +61,7 @@ function readURL(input) {
   }
 
   $('.image-upload-wraps').bind('dragover', function () {
-    $('.image-upload-wraps').addClass('image-dropping');
+  $('.image-upload-wraps').addClass('image-dropping');
   });
   $('.image-upload-wraps').bind('dragleave', function () {
     $('.image-upload-wraps').removeClass('image-dropping');

@@ -239,9 +239,13 @@
                 <div class="row col-10 center">
                     <fieldset class="h1 ">Formulaire de demande</fieldset>
                 <br><br>
-                <form action="{{route('create_demande',Auth::user()->id)}}" method="post" >
+                <form action="{{route('create_demande')}}" method="post" enctype="multipart/form-data" >
                     @csrf
                     <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <input type="text" value="{{Auth::user()->id}}" readonly name="identifiant" class="form-control  @error('identifiant') is-invalid @enderror" hidden>
+                            @error('identifiant')<span class="text text-danger">{{$message}}</span>@enderror
+                        </div>
                         <div class="form-group col-md-6">
                             <label>Nom*</label>
                             <input type="text" value="{{Auth::user()->name}}" readonly name="name" class="form-control  @error('name') is-invalid @enderror" >
@@ -254,12 +258,12 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nom Père*</label>
-                            <input type="text" value="" name="name_pere" class="form-control  @error('name_pere') is-invalid @enderror">
+                            <input type="text" value="{{old('name_pere')}}" name="name_pere" class="form-control  @error('name_pere') is-invalid @enderror">
                             @error('name_pere')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nom Mere*</label>
-                            <input type="text" value="" name="name_mere" class="form-control  @error('name_mere') is-invalid @enderror">
+                            <input type="text" value="{{old('name_mere')}}" name="name_mere" class="form-control  @error('name_mere') is-invalid @enderror">
                             @error('name_mere')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
@@ -269,17 +273,17 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Date de Naissance*</label>
-                            <input type="text" value="" name="date_naissance" class="form-control  @error('date_naissance') is-invalid @enderror">
+                            <input type="text" value="{{old('date_naissance')}}" name="date_naissance" class="form-control  @error('date_naissance') is-invalid @enderror">
                             @error('date_naissance')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
                             <label>Lieu Naissance*</label>
-                            <input type="text" value="" name="lieu_naissance" class="form-control  @error('lieu_naissance') is-invalid @enderror">
+                            <input type="text" value="{{old('lieu_naissance')}}" name="lieu_naissance" class="form-control  @error('lieu_naissance') is-invalid @enderror">
                             @error('lieu_naissance')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
                             <label>Telephone*</label>
-                            <input type="text" value="" name="telephone" class="form-control  @error('telephone') is-invalid @enderror">
+                            <input type="text" value="{{old('telephone')}}" name="telephone" class="form-control  @error('telephone') is-invalid @enderror">
                             @error('telephone')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="from-group col-md-6">

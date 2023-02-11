@@ -226,14 +226,26 @@
                 <table class="table table-striped table-bordered" id="sampleTable">
                     <thead>
                         <tr>
+                            <th>N°</th>
                             <th>Type Demande</th>
                             <th>Date Demande</th>
                             <th>Status</th>
-                            <th>ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
+                        <?php $id = 1;?>
+                        @foreach($liste_demande as $liste)
+                        <tr>
+                            <td>{{$id++}}</td>
+                            <td>{{$liste->type_demande}}</td>
+                            <td>{{$liste->created_at}}</td>
+                            @if($liste->actifs == 0)
+                                <td>En cours de traitement</td>
+                            @else
+                                <td>Demande traitée</td>
+                            @endif
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

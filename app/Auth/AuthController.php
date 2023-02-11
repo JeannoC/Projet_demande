@@ -3,11 +3,13 @@
 namespace App\Auth;
 
 use App\Models\User;
+use App\Models\Demande;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Context;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -17,7 +19,8 @@ class AuthController extends Controller
     }
 
     public function file(){
-        return view('Auth::profile');
+        $liste_demande = Demande::where('users_id', Auth::user()->id)->get();
+        return view('Auth::profile',compact('liste_demande'));
     }
 
 /*     public function profils()

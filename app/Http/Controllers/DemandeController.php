@@ -55,7 +55,7 @@ class DemandeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
 
         $validation = Validator::make($request->all(),[
@@ -63,7 +63,7 @@ class DemandeController extends Controller
             'prenom' => 'bail|required',
             'email' => 'bail|required|email|max:255',
             'name_pere' => 'bail|required',
-            'nom_mere' => 'bail|required',
+            'name_mere' => 'bail|required',
             'lieu_naissance' => 'bail|required',
             'date_naissance' => 'bail|required',
             'genre' => 'bail|required',
@@ -76,10 +76,6 @@ class DemandeController extends Controller
 
             return redirect()->back()->withErrors($validation)->withInput();
         }else{
-            $imageName = time().'.'.$request->images->extension();
-            $request->images->move(public_path('images'), $imageName);
-            $imageNames = time().'.'.$request->image_signature->extension();
-            $request->image_signature->move(public_path('images'), $imageNames);
             $demande = new Demande();
             $demande->name=$request->name;
             $demande->prenom=$request->prenom;
@@ -91,10 +87,27 @@ class DemandeController extends Controller
             $demande->date_naissance=$request->date_naissance;
             $demande->type_demande=$request->type_demande;
             $demande->genre=$request->genre;
-            $demande->photo=$imageName;
-            $demande->photo_signature=$imageNames;
-            $demande->users_id=$id;
-
+            $demande->users_id=$request->identifiant;
+            if($request->file('images'))
+            {
+                $file=$request->file('images');
+                $uploadDestination="img/images";
+                $originalExtensions=$file->getClientOriginalExtension();
+                $originalName=time().".".$originalExtensions;
+                $nomImage=$uploadDestination."/".$originalName;
+                $file->move($uploadDestination,$originalName);
+                $demande->photo=$originalName;
+            }
+            if($request->file('image_signature'))
+            {
+                $file=$request->file('image_signature');
+                $uploadDestination="img/imageSignature";
+                $originalExtensions=$file->getClientOriginalExtension();
+                $originalName=time().".".$originalExtensions;
+                $nomImage=$uploadDestination."/".$originalName;
+                $file->move($uploadDestination,$originalName);
+                $demande->photo_signature=$originalName;
+            }
             $demande->save();
             toastr()->success("Création du compte effectuée avec success");
             return back();
@@ -143,7 +156,6 @@ class DemandeController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $demande=Demande::FindOrFail($id);
         $demande->prevalitation=1;
         $demande->update();
@@ -165,7 +177,6 @@ class DemandeController extends Controller
         //envoyer l'email a l'utilisateur
         toastr()->success('Validation éffectuée avec succèss');
         return redirect()->route('mailing',$users->id);
-
 
     }
 
