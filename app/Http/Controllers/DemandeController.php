@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Demande;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\NotificationController;
+use Nette\Utils\Random;
 
 class DemandeController extends Controller
 {
@@ -35,7 +37,7 @@ class DemandeController extends Controller
     public function preValidation(){
         $demandeNotif=new NotificationController();
         $count_demande=$demandeNotif->compteDemande();
-        $demande=Demande::where('demande',1)->where('prevalitation',1)->orderBy('id','DESC')->get();
+        $demande=Demande::where('demande',1)->where('prevalitation',1)->where('actifs',0)->orderBy('id','DESC')->get();
         return view('admin.prevalidation.preValidation',compact('demande','count_demande'));
     }
 
@@ -110,7 +112,7 @@ class DemandeController extends Controller
             }
             $demande->save();
             toastr()->success("Création du compte effectuée avec success");
-            return back();
+            return redirect('profile');
 
         }
     }
@@ -123,7 +125,7 @@ class DemandeController extends Controller
      */
     public function show($id)
     {
-        $demande=User::where('demande',1)->where('id',$id)->first();
+        $demande=Demande::where('demande',1)->where('id',$id)->first();
         $demandeNotif=new NotificationController();
         $count_demande=$demandeNotif->compteDemande();
 
@@ -156,7 +158,9 @@ class DemandeController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $demande=Demande::FindOrFail($id);
+        $demande->admin_id = Auth::user()->id;
         $demande->prevalitation=1;
         $demande->update();
         toastr()->success('Validation éffectuée avec succèss');
@@ -166,14 +170,10 @@ class DemandeController extends Controller
 
     public function updatevalidation(Request $request, $id)
     {
-        $identifiant=rand(111111000,999999000);
-        $users=User::FindOrFail($id);
-        $users->identifiant=$identifiant;
         $demande=Demande::FindOrFail($id);
         $demande->actifs=1;
         $demande->update();
-
-        $gmail=$users->email;
+        $gmail = $users->email; 
         //envoyer l'email a l'utilisateur
         toastr()->success('Validation éffectuée avec succèss');
         return redirect()->route('mailing',$users->id);

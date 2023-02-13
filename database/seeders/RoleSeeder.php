@@ -25,13 +25,17 @@ class RoleSeeder extends Seeder
         Role::create([
             'name'=>'utilisateur'
         ]);
-        $users=User::create([
+        Permission::create([
+            'name'=>'createUser'
+        ]);
+        $user=User::create([
             'email'=>'admin@admin.com',
             'name'=>'admin',
             'prenom'=>'admin',
             'password'=>bcrypt(1234),
             'statuts'=>'1'
         ]);
-        $users->attachRole('admin');
+        $user->attachPermission('createUser');
+        $user->attachRole('admin');
     }
 }

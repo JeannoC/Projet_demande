@@ -185,7 +185,7 @@
                                     <div class="dropdown-header noti-title">
                                         <h6 class="text-overflow m-0">Bienvenue!</h6>
                                     </div>
-                                    <a href="" class="dropdown-item">
+                                    <a href="{{route('profile')}}" class="dropdown-item">
                                         <i class="fa fa-user"></i>
                                         <span>Mon Profil</span>
                                     </a>
@@ -232,7 +232,7 @@
                     </thead>
                     <tbody>
                         <?php $id = 1;?>
-                        @foreach($liste_demande as $liste)
+                        @foreach($attestation as $liste)
                         <tr>
                             <td>{{$id++}}</td>
                             <td>{{$liste->type_demande}}</td>

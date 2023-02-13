@@ -33,7 +33,7 @@ class CreateDemandesTable extends Migration
             $table->integer('demande')->default('1');
             $table->integer('prevalitation')->default('0');
             $table->string('prevalidateur')->default('');
-            $table->string('validateur')->default('');
+            $table->string('admin_id')->default('');
             $table->rememberToken();
             $table->timestamps();
 
