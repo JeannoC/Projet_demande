@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Demande;
+use App\Models\Demandeur;
 use App\Models\PreValidation;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -48,5 +49,9 @@ class User extends Authenticatable
 
     public function demandes(){
         return $this->hasMany(Demande::class);
+    } 
+    
+    public function demandeur(){
+        return $this->hasOne(Demandeur::class);
     }
 }
