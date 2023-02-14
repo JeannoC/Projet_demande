@@ -34,9 +34,9 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        request()->validate([
-            'email'=>'required',
-            'password'=>'required'
+        $validation = Validator::make($request->all(),[
+            'email' => 'bail|required|email|max:255|unique:users',
+            'password'=>'bail|required'
         ]);
 
         $verifyUser = User::where('email', $request->email)
@@ -74,7 +74,7 @@ class AuthController extends Controller
         }else{
             Session::flash('error',"Identifiant ou mot de passe incorrect");
         }
-        return back();
+        return redirect()->back()->withErrors($validation)->withInput();
     }
 
     public function create(Request $request){

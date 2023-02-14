@@ -258,12 +258,12 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nom Père*</label>
-                            <input type="text" value="{{old('name_pere')}}" name="name_pere" class="form-control  @error('name_pere') is-invalid @enderror">
+                            <input type="text" value="{{$edit->nom_pere}}" name="name_pere" class="form-control  @error('name_pere') is-invalid @enderror">
                             @error('name_pere')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nom Mere*</label>
-                            <input type="text" value="{{old('name_mere')}}" name="name_mere" class="form-control  @error('name_mere') is-invalid @enderror">
+                            <input type="text" value="{{$edit->nom_mere}}" name="name_mere" class="form-control  @error('name_mere') is-invalid @enderror">
                             @error('name_mere')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
@@ -273,22 +273,23 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Date de Naissance*</label>
-                            <input type="date" value="{{old('date_naissance')}}" name="date_naissance" class="form-control  @error('date_naissance') is-invalid @enderror">
+                            <input type="date" value="{{$edit->date_naissance}}" name="date_naissance" class="form-control  @error('date_naissance') is-invalid @enderror">
                             @error('date_naissance')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
                             <label>Lieu Naissance*</label>
-                            <input type="text" value="{{old('lieu_naissance')}}" name="lieu_naissance" class="form-control  @error('lieu_naissance') is-invalid @enderror">
+                            <input type="text" value="{{$edit->lieu_naissance}}" name="lieu_naissance" class="form-control  @error('lieu_naissance') is-invalid @enderror">
                             @error('lieu_naissance')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6">
                             <label>Telephone*</label>
-                            <input type="text" value="{{old('telephone')}}" name="telephone" class="form-control  @error('telephone') is-invalid @enderror">
+                            <input type="text" value="{{$edit->telephone}}" name="telephone" class="form-control  @error('telephone') is-invalid @enderror">
                             @error('telephone')<span class="text text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="from-group col-md-6">
                             <label for="genre">Genre*</label>
                             <select class="form-control" name="genre" id="genre">
+                            <option value="{{$edit->genre}}" selected>{{$edit->genre}}</option>
                                 <option value="masculin">Masculin</option>
                                 <option value="feminin">Feminin</option>
                             </select>
@@ -296,17 +297,18 @@
                         <div class="from-group col-md-6">
                             <label for="type_demande">Type de demande</label>
                             <select class="form-control" name="type_demande" id="type_demande">
+                                <option value="{{$edit->type_demande}}" selected>{{$edit->type_demande}}</option>
                                 <option value="laisser-passer">Laisser passer</option>
-                                <option value="attestation">Attestation</option>
+                                <option value="atestation">Atestation</option>
                                 <option value="carte">Carte</option>
                             </select>
                         </div>
                         <div class="file-upload col-6">
                             <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ajout Photo</button>
                             <div class="image-upload-wrap">
-                              <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="images"/>
+                              <input class="file-upload-input" type='file' value="{{$edit->photo}}" onchange="readURL(this);" accept="image/*" name="images"/>
                               <div class="drag-text">
-                                <h3>Faites glisser et déposez un fichier ou sélectionnez ajouter une image</h3>
+                                <img src="{{asset('img/images/'.$edit->photo)}}" alt="" width="90%">
                               </div>
                             </div>
                             <div class="file-upload-content">
@@ -319,9 +321,9 @@
                           <div class="file-upload col-6">
                               <button class="file-upload-btn" type="button" onclick="$('.file-upload-inputs').trigger( 'click' )">Ajout Photo Signature</button>
                               <div class="image-upload-wraps">
-                                <input class="file-upload-inputs" type='file' onchange="readURLS(this);" accept="image/*" name="image_signature"/>
+                                <input class="file-upload-inputs" type='file' value="{{$edit->photo_signature}}" onchange="readURLS(this);" accept="image/*" name="image_signature"/>
                                 <div class="drag-text">
-                                  <h3>Faites glisser et déposez un fichier ou sélectionnez ajouter une image</h3>
+                                  <img src="{{asset('img/imageSignature/'.$edit->photo_signature)}}" alt="" width="90%">
                                 </div>
                               </div>
                               <div class="file-upload-contents">
@@ -332,7 +334,7 @@
                               </div>
                             </div>
                         <div class="form-group col-md-3">
-                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button type="submit" class="btn btn-primary">Mise a jour</button>
                         </div>
                     </div>
                 </form>

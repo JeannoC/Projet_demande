@@ -13,35 +13,37 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="tile">
-            <form action="{{route('users.store')}}" method="post" class="row">
-            @csrf
-                <div class="form-group col-md-3">
-                    <label for="">Nom </label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name"  placeholder="Saisir nom complet">
-                    @error('name')<span class="text text-danger">{{$message}}</span>@enderror
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Prenom</label>
-                    <input type="text" class="form-control @error('contact') is-invalid @enderror" value="{{ old('contact') }}" name="prenom"  placeholder="Saisir prenom">
-                    @error('prenom')<span class="text text-danger">{{$message}}</span>@enderror
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Entrer L'Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email"  placeholder="Saisir email">
-                    @error('email')<span class="text text-danger">{{$message}}</span>@enderror
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Mot de passe</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password"  placeholder="Saisir le mot de passe">
-                    @error('password')<span class="text text-danger">{{$message}}</span>@enderror
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Actions</label><br>
-                    <button type="submit" class="btn btn-primary">Enregister</button>
-                </div>
-            </form>
-        </div>
+       @if (Auth::user()->hasPermission('createUser'))
+       <div class="tile">
+        <form action="{{route('users.store')}}" method="post" class="row">
+        @csrf
+            <div class="form-group col-md-3">
+                <label for="">Nom </label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name"  placeholder="Saisir nom complet">
+                @error('name')<span class="text text-danger">{{$message}}</span>@enderror
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Prenom</label>
+                <input type="text" class="form-control @error('contact') is-invalid @enderror" value="{{ old('contact') }}" name="prenom"  placeholder="Saisir prenom">
+                @error('prenom')<span class="text text-danger">{{$message}}</span>@enderror
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Entrer L'Email</label>
+                <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email"  placeholder="Saisir email">
+                @error('email')<span class="text text-danger">{{$message}}</span>@enderror
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Mot de passe</label>
+                <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password"  placeholder="Saisir le mot de passe">
+                @error('password')<span class="text text-danger">{{$message}}</span>@enderror
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Actions</label><br>
+                <button type="submit" class="btn btn-primary">Enregister</button>
+            </div>
+        </form>
+    </div>
+       @endif
         <div class="tile">
         <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="sampleTable">
@@ -51,7 +53,9 @@
                             <th>NOM </th>
                             <th>PRENOM</th>
                             <th>EMAIL</th>
+                            @if (Auth::user()->hasPermission('createUser'))
                             <th>ACTIONS</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +66,7 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->prenom}}</td>
                             <td>{{$user->email}}</td>
+                            @if (Auth::user()->hasPermission('createUser'))
                             <td class="text-xs-center">
                                 @if($user->statuts==1)
                                 <form action="{{url('suspendre/'.$user->id)}}" method="post">
@@ -77,6 +82,7 @@
                                 </form>
                                 @endif
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

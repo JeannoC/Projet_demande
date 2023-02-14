@@ -29,10 +29,8 @@ Route::get('/mail/{id}', [MailController::class, 'index'])->name('mailing');
 Route::group(["namespace" => "front"], function(){
     Route::get('/', [FrontedController::class, 'index'])->name("front.index");
     Route::get('/front/propos', [FrontedController::class, 'about'])->name("front.presentation.propos");
-    Route::get('/actualites', [FrontedController::class, 'actualites'])->name("front.actualites.index");
-    Route::get('/actualites/{id}', [FrontedController::class, 'actualites_show'])->name("front.actualites.show");
-    Route::get('/activites', [FrontedController::class, 'activites'])->name("front.activites.index");
-    Route::get('/activites/{id}', [FrontedController::class, 'activites_show'])->name("front.activites.show");
+    Route::get('/laisserPasser', [FrontedController::class,'laisserpasser'])->name("laisserpasser")->middleware("auth");
+    Route::get('/attestation', [FrontedController::class,'attestation'])->name("attestation")->middleware("auth");
 });
 
 Route::group(["namespace" => "admins"], function(){
@@ -44,6 +42,7 @@ Route::group(["namespace" => "admins"], function(){
     Route::put('/demandevalidation/{id}', [DemandeController::class, 'updatevalidation'])->name("admins.demande.updatevalidation")->middleware("auth");
     Route::get('/preValidation',[DemandeController::class, 'preValidation'])->name('admins.preValidation')->middleware("auth");
 
+    Route::get('/modifier_profile/{id}', [FrontedController::class, 'modifier_profile'])->name("modifier_profile")->middleware("auth");
 
     Route::get('/users', [UtilisateurController::class, 'index'])->name("admins.utilisateur")->middleware("auth");
 

@@ -18,14 +18,13 @@
                     <table class="table table-striped table-bordered" id="sampleTable">
                         <thead>
                             <th>N°</th>
+                            <th>Date demande</th>
                             <th>Prenom</th>
                             <th>Nom</th>
                             <th>Type de Demande</th>
                             <th>Genre</th>
                             <th>Date Naissance</th>
                             <th>Lieu Naissance</th>
-                            <th>Telephone</th>
-                            <th>Adresse</th>
                             <th><i class="fa fa-folder-open"></i></th>
                             <th>Valider</th>
                         </thead>
@@ -35,15 +34,13 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{substr($demand->created_at, 0, 10)}}</td>
                                 <td>{{$demand->prenom}}</td>
-                                <td>{{$demand->nom}}</td>
+                                <td>{{$demand->name}}</td>
                                 <td>{{$demand->type_demande}}</td>
                                 <td>{{$demand->genre}}</td>
                                 <td>{{$demand->date_naissance}}</td>
                                 <td>{{$demand->lieu_naissance}}</td>
-                                <td>{{$demand->adresse}}</td>
-                                <td>{{$demand->telephone}}</td>
                                 <td>
-                                    <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info"><i class="fa fa-folder-open"></i></a>
+                                    <a href="{{route('admins.demande.show', $demand->id)}}" class="btn btn-info"><i class="fa fa-folder-open"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{route('admins.demande.updatevalidation',$demand->id)}}" method="post">
