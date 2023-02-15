@@ -87,6 +87,8 @@
                             <th>Genre</th>
                             <th>Date Naissance</th>
                             <th>Lieu Naissance</th>
+                            <th>Telephone</th>
+                            <th>Adresse</th>
                             <th><i class="fa fa-folder-open"></i></th>
                         </thead>
                         <tbody>
@@ -95,11 +97,13 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{substr($demand->created_at, 0, 10)}}</td>
                                 <td>{{$demand->prenom}}</td>
-                                <td>{{$demand->name}}</td>
+                                <td>{{$demand->nom}}</td>
                                 <td>{{$demand->type_demande}}</td>
                                 <td>{{$demand->genre}}</td>
                                 <td>{{$demand->date_naissance}}</td>
                                 <td>{{$demand->lieu_naissance}}</td>
+                                <td>{{$demand->telephone}}</td>
+                                <td>{{$demand->adresse}}</td>
                                 <td>
                                     <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info"><i class="fa fa-folder-open"></i></a>
                                 </td>

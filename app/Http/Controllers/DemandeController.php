@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Demande;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\NotificationController;
 use Nette\Utils\Random;
 
@@ -23,27 +20,20 @@ class DemandeController extends Controller
         if($segments == "nouveaux"){
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
-            $demande=Demande::where('demande',1)->where('prevalitation',0)->orderBy('id','DESC')->get();
+            $demande=User::where('demande',1)->where('actifs',0)->orderBy('id','DESC')->get();
             return view('admin.demande.index',compact('demande','count_demande','segments'));
-        }elseif($segments == "traiter"){
+        }
+        if($segments == "traiter"){
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
-            $demande=Demande::where('demande',1)->where('actifs',1)->orderBy('id','DESC')->get();
+            $demande=User::where('demande',1)->where('actifs',1)->orderBy('id','DESC')->get();
             return view('admin.demande.index',compact('demande','count_demande','segments'));
         }
 
     }
 
-    public function preValidation(){
-        $demandeNotif=new NotificationController();
-        $count_demande=$demandeNotif->compteDemande();
-        $demande=Demande::where('demande',1)->where('prevalitation',1)->where('actifs',0)->orderBy('id','DESC')->get();
-        return view('admin.prevalidation.preValidation',compact('demande','count_demande'));
-    }
-
     /**
      * Show the form for creating a new resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -125,9 +115,9 @@ class DemandeController extends Controller
      */
     public function show($id)
     {
-        $demande=Demande::where('demande',1)->where('id',$id)->first();
-        $demandeNotif=new NotificationController();
-        $count_demande=$demandeNotif->compteDemande();
+        $demande = Demande::find($id);
+        $demandeNotif = new NotificationController();
+        $count_demande = 0; //$demandeNotif->compteDemande();
 
         if($demande)
         {
