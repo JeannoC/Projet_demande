@@ -22,6 +22,11 @@ use App\Http\Controllers\MailController;
 */
 Route::get('/mail/{id}', [MailController::class, 'index'])->name('mailing');
 
+Route::get('/tpl', function(){
+    $app_name = env('APP_NAME','');
+    return view('layout.app')->with('app_name',$app_name );
+});
+
 
 
 

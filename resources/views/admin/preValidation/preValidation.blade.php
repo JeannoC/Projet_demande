@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.app')
 @section('content')
 <main class="app-content">
     <div class="app-title">

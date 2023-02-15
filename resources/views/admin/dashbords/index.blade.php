@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.app')
 @section('content')
 
 <main class="app-content">
@@ -12,16 +12,11 @@
             <li class="breadcrumb-item"><a href="{{route("dashbord.index")}}">Dashboard</a></li>
         </ul>
     </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-3">
-            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-                <div class="info">
-                    <h4>Demandes</h4>
-                    <p><b>{{$count_demande}}</b></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    @if(Auth::user()->hasRole('Admin'))
+        @include('admin.dashbords.includes.__admin',['count_demande'=>$count_demande])
+    @else
+        @include('admin.dashbords.includes.__admin')
+    @endif
 </main>
 
 @endsection

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.app')
 @section('content')
 
 @if($segments=="nouveaux")
