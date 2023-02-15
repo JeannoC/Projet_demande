@@ -23,58 +23,28 @@ class AuthController extends Controller
         return view('Auth::profile',compact('liste_demande'));
     }
 
-/*     public function profils()
-    {
-        $idUsers=Auth::user()->id;
-
-        $UsersInfos=Auth::user();
-
-        return view('Auth::profils');
-    } */
-
     public function login(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'email' => 'bail|required|email|max:255|unique:users',
+            'email' => 'bail|required|email|max:255',
             'password'=>'bail|required'
         ]);
 
-        $verifyUser = User::where('email', $request->email)
-                            ->where('statuts', 1)
-                            ->first();
-
-        if($verifyUser && $verifyUser->statuts == 1)
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::Attempt($credentials))
         {
-            $credentials = $request->only('email', 'password');
+            $verifyprofile = User::where('email', $request->email)->first();
 
-            if (Auth::Attempt($credentials))
-            {
-                return redirect()->intended('/dashboard');
+            if($verifyprofile->status  == 1){
+                return redirect()->route('dashbord.index');
             }
-
-            return redirect()->back();
-        }else{
-            Session::flash('error',"Identifiant ou mot de passe incorrect");
+            if($verifyprofile->status == 0){
+                return redirect()->route('profile'); 
+            }
         }
 
-        $verifyprofile = User::where('email', $request->email)
-                                    ->where('statuts', 0)
-                                    ->first();
-
-        if($verifyprofile && $verifyprofile->statuts == 0)
-        {
-            $credentials = $request->only('email', 'password');
-
-            if (Auth::Attempt($credentials))
-            {
-                return redirect()->route('profile');
-            }
-            // toastr()->error('Accès refusé!!!','Alert');
-            return redirect()->back();
-        }else{
-            Session::flash('error',"Identifiant ou mot de passe incorrect");
-        }
-        return redirect()->back()->withErrors($validation)->withInput();
+        return redirect()->back()->withError("Identifiant ou mot de passe incorrect");
     }
 
     public function create(Request $request){

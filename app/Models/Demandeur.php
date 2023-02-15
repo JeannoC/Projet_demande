@@ -8,15 +8,22 @@ use App\Models\User;
 
 class Demandeur extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public function documentDemandeurs()
-    {
-      return $this->belongsTo(DocumentDemandeur::class);
-    } 
-    
-    public function user()
-    {
-      return $this->belongsTo(User::class);
-    }
+  public function documentDemandeurs()
+  {
+    return $this->hasMany(DocumentDemandeur::class);
+  } 
+
+  public function demandes()
+  {
+    return $this->hasMany(Demande::class);
+  } 
+  
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
+
+  
 }

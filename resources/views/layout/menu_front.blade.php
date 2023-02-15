@@ -15,7 +15,7 @@
             <div class="col-lg-7 col-md-7">
                 <ul class="header-info">
                     <li><a href="{{route('front.presentation.propos')}}">A propos</a></li>
-                    <li>Université Mahatma Gandhi de Guinée</li>
+                    <li>Demande d'attestation et laisse passe</li>
                 </ul>
             </div>
         </div>

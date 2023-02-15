@@ -14,11 +14,12 @@ class CreateDocumentDemandeur extends Migration
     public function up()
     {
         Schema::create('document_demandeurs', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->timestamps();
             $table->string('path')->nullable();
             $table->string('filename')->nullable();
             $table->string('name')->nullable();
+            $table->string('type_document')->enum('photo','signature','autre')->nullable();
             $table->foreignId('demandeurs_id')->constrained()->onDelete('cascade');
         });
     }

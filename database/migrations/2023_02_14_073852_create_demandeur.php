@@ -13,17 +13,18 @@ class CreateDemandeur extends Migration
      */
     public function up()
     {
-        Schema::create('demandeurs', function (Blueprint $table) {
-            $table->id();
+        Schema::create('demandes', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('type_demande')->default('');
-            $table->string('genre')->default('');
-            $table->string('date_naissance')->default('');
-            $table->string('lieu_naissance')->default('');
-            $table->string('nom_pere')->default('');
-            $table->string('nom_mere')->default();
-            $table->string('profession')->nullable();
-            $table->string('adresse')->nullable();
+            $table->string('type_demande')->nullable()->enum('attestation','laisser passer');
+            $table->date('validated_at')->nullable();
+            $table->boolean('isValidated')->nullable();
+            $table->boolean('isDismiss')->nullable();
+            $table->date('dismissed_at')->nullable();
+            $table->boolean('isAccepted')->nullable();
+            $table->text('comment')->nullable();
+           
+            $table->foreignId('demandeurs_id')->constrained()->onDelete('cascade');
             $table->foreignId('users_id')->constrained()->onDelete('cascade');
 
         });
@@ -36,6 +37,6 @@ class CreateDemandeur extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('demandeurs');
+        Schema::dropIfExists('demandes');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDemandesTable extends Migration
+class CreateDemandeursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,33 +13,18 @@ class CreateDemandesTable extends Migration
      */
     public function up()
     {
-        Schema::create('demandes', function (Blueprint $table) {
-            $table->id();
-            $table->string('type_demande')->default('');
-            $table->string('prenom')->default('');
-            $table->string('name')->default('');
+        Schema::create('demandeurs', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('genre')->default('');
             $table->string('date_naissance')->default('');
             $table->string('lieu_naissance')->default('');
-
             $table->string('nom_pere')->default('');
             $table->string('nom_mere')->default('');
-            $table->string('photo')->default('');
-            $table->string('photo_signature')->default('');
-
-            $table->string('email');
             $table->string('telephone')->default('');
-            $table->string('actifs')->default('0');
-            $table->integer('demande')->default('1');
-            $table->integer('prevalitation')->default('0');
             $table->string('prevalidateur')->default('');
-            $table->string('admin_id')->default('');
-            $table->rememberToken();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
-
-
             $table->foreignId('users_id')->constrained()->onDelete('cascade');
-
 
         });
     }
@@ -51,6 +36,6 @@ class CreateDemandesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('demandes');
+        Schema::dropIfExists('demandeurs');
     }
 }

@@ -27,6 +27,9 @@
         <form  class="login-form" action="{{route('login')}}"  method="POST">
             @csrf
           <h3 class="login-head">AUTHENTIFICATION</h3>
+          @if(session()->has('error'))
+            <div class="alert alert-danger">{{session('error')}}</div>
+          @endif
           <div class="form-group">
             <label class="control-label">EMAIL</label>
             <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" type="text" name="email" autofocus>
