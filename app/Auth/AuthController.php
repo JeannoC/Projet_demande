@@ -73,42 +73,4 @@ class AuthController extends Controller
 
     }
 
-    public function create_demande(Request $request, $id){
-
-        $usersInfos=User::FindOrFail($id);
-
-
-        $validation = Validator::make($request->all(),[
-            'name_pere' => 'bail|required|min:3',
-            'name_mere' => 'bail|required|min:3',
-            'type_demande' => 'bail|required',
-            'lieu_naissance' => 'bail|required',
-            'genre' => 'bail|required',
-            'date_naissance' => 'bail|required',
-
-        ]);
-        //user segmeent
-        if($validation->fails()){
-            return redirect()->back()->withErrors($validation)->withInput();
-        }else{
-            $usersInfos->nom_pere=$request->name_pere;
-            $usersInfos->nom_mere=$request->name_mere;
-            $usersInfos->type_demande=$request->type_demande;
-            $usersInfos->lieu_naissance=$request->lieu_naissance;
-            $usersInfos->genre=$request->genre;
-            $usersInfos->name=$request->name;
-            $usersInfos->prenom=$request->prenom;
-            $usersInfos->email=$request->email;
-            $usersInfos->date_naissance=$request->date_naissance;
-            $usersInfos->demande='1';
-            $usersInfos->save();
-
-            toastr()->success('Enregistrement éffectué avec succèss');
-            return redirect()->route('profile');
-        }
-    }
-
-    public function adddemande(){
-        return view('Auth::demande');
-    }
 }
