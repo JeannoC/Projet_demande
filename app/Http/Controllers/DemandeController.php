@@ -122,6 +122,7 @@ class DemandeController extends Controller
     public function update(Request $request, $id)
     {
         $demande=Demande::FindOrFail($id);
+        // $demande->user_id = Auth::user()->id;
         $demande->isValidated = True;
         $demande->validated_at = date('Y-m-d');
         $demande->update();
