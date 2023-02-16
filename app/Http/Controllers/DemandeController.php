@@ -21,22 +21,22 @@ class DemandeController extends Controller
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
             $demande=Demande::where('isValidated',0)->orderBy('id','DESC')->get();
-            return view('admin.dashbords.includes.__demandes',compact('demande','count_demande','segments'));
+            return view('admin.demandes.index',compact('demande','count_demande','segments'));
         }
         if($segments == "traiter"){
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
             $demande=Demande::where('isValidated',1)->orderBy('id','DESC')->get();
-            return view('admin.dashbords.includes.__demandes',compact('demande','count_demande','segments'));
+            return view('admin.demandes.index',compact('demande','count_demande','segments'));
         }
 
     }
     public function preValidation(){
-            $segments =request()->segment(1);
-            $demandeNotif=new NotificationController();
-            $count_demande=$demandeNotif->compteDemande();
-            $demande=Demande::where('isValidated',1)->orderBy('id','DESC')->get();
-            return view('admin.dashbords.includes.__prevalidation',compact('demande','count_demande','segments'));
+        $segments =request()->segment(1);
+        $demandeNotif=new NotificationController();
+        $count_demande=$demandeNotif->compteDemande();
+        $demande=Demande::where('isValidated',1)->orderBy('id','DESC')->get();
+        return view('admin.demandes.index',compact('demande','count_demande','segments'));
     }
     /**
      * Show the form for creating a new resource.

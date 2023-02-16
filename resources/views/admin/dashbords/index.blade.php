@@ -14,7 +14,6 @@
     </div>
     @if(Auth::user()->hasRole('Admin'))
         @include('admin.dashbords.includes.__admin',['count_demande' => $count_demande])
-        @include('admin.dashbords.includes.__demandes', ['count_demande' => $count_demande, 'demande' => $demande, 'segments' => $segments])
         @include('admin.dashbords.includes.__prevalidation', ['count_demande' => $count_demande, 'demande' => $demande, 'segments' => $segments])
         @include('admin.dashbords.includes.__utilisateur',['users' => $users,'count_demande' => $count_demande])
     @else

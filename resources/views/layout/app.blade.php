@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <link rel="stylesheet" href="https://rawcdn.githack.com/Loopple/loopple-public-assets/ad60f16c8a16d1dcad75e176c00d7f9e69320cd4/argon-dashboard/css/nucleo/css/nucleo.css">
-    <link rel="stylesheet" href="./assets/css/theme.css">
-    <link rel="stylesheet" href="./assets/css/loopple/loopple.css">
+    <link rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/loopple/loopple.css')}}">
 </head>
 
-<body>
+<body style="background-color:#f8f9fe">
     <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white loopple-fixed-start" id="sidenav-main">
         <div class="navbar-inner">
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
