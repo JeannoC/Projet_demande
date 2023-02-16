@@ -43,14 +43,14 @@
                                         <td>{{$demand->demandeur->date_naissance}}</td>
                                         <td>{{$demand->demandeur->lieu_naissance}}</td>
                                         <td>
-                                            <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info"><i class="fa fa-folder-open"></i></a>
+                                            <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></a>
                                         </td>
                                         <td>
                                             @if($segments=="nouveaux")
                                             <form action="{{route('admins.demande.update',$demand->id)}}" method="post">
                                                 @csrf
                                                 {{method_field('put')}}
-                                                <button class="btn btn-info" type="submit">Valider</button>
+                                                <button class="btn btn-info btn-sm" type="submit">Valider</button>
                                             </form>
                                             @else
                                                 <span>Traitees</span>
