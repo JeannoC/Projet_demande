@@ -13,7 +13,7 @@ class UtilisateurController extends Controller
         $users=User::all();
         $demandeNotif=new NotificationController();
         $count_demande=$demandeNotif->compteDemande();
-        return view('admin.utilisateurs.index',compact('users','count_demande'));
+        return view('admin.dashbords.includes.__utilisateur',compact('users','count_demande'));
     }
     public function store(Request $request){
         $validation = Validator::make($request->all(),[

@@ -49,7 +49,6 @@
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
                      <li ><a class="app-menu__item {{ (request()->segment(1)== 'nouveaux') ? 'active' : ''}}" href="{{route('admins.demande')}}"><i class="app-menu__icon fa fa-bell"></i><span class="app-menu__label">Nouveaux</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
                      <li><a class="app-menu__item {{(request()->segment(1)== 'traiter') ? 'active': ''}}" href="{{route('admins.demande.liste')}}"><i class="app-menu__icon fa fa-user-circle-o"></i><span class="app-menu__label">Traités</span></a></li>
-
                 </ul>
             </li>
             @if (Auth::user()->hasPermission('valider'))

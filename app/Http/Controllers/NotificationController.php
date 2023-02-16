@@ -7,7 +7,7 @@ use App\Models\Demande;
 class NotificationController extends Controller
 {
     public function compteDemande(){
-        $demande=Demande::where('demande',1)->where('actifs',0)->count();
+        $demande=Demande::where('isValidated',0)->count();
         return $demande;
     }
 }

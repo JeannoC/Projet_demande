@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Demande;
 use App\Http\Controllers\NotificationController;
@@ -20,18 +20,24 @@ class DemandeController extends Controller
         if($segments == "nouveaux"){
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
-            $demande=User::where('demande',1)->where('actifs',0)->orderBy('id','DESC')->get();
-            return view('admin.demande.index',compact('demande','count_demande','segments'));
+            $demande=Demande::where('isValidated',0)->orderBy('id','DESC')->get();
+            return view('admin.dashbords.includes.__demandes',compact('demande','count_demande','segments'));
         }
         if($segments == "traiter"){
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
-            $demande=User::where('demande',1)->where('actifs',1)->orderBy('id','DESC')->get();
-            return view('admin.demande.index',compact('demande','count_demande','segments'));
+            $demande=Demande::where('isValidated',1)->orderBy('id','DESC')->get();
+            return view('admin.dashbords.includes.__demandes',compact('demande','count_demande','segments'));
         }
 
     }
-
+    public function preValidation(){
+            $segments =request()->segment(1);
+            $demandeNotif=new NotificationController();
+            $count_demande=$demandeNotif->compteDemande();
+            $demande=Demande::where('isValidated',1)->orderBy('id','DESC')->get();
+            return view('admin.dashbords.includes.__prevalidation',compact('demande','count_demande','segments'));
+    }
     /**
      * Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
@@ -163,7 +169,7 @@ class DemandeController extends Controller
         $demande=Demande::FindOrFail($id);
         $demande->actifs=1;
         $demande->update();
-        $gmail = $users->email; 
+        $gmail = $users->email;
         //envoyer l'email a l'utilisateur
         toastr()->success('Validation éffectuée avec succèss');
         return redirect()->route('mailing',$users->id);
