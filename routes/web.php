@@ -49,8 +49,8 @@ Route::group(["namespace" => "front"], function(){
 
 Route::group(["namespace" => "admins"], function(){
     Route::get('/dashboard', [DashbordController::class, 'index'])->name("dashbord.index")->middleware("auth");
-    Route::get('/nouveaux', [DemandeController::class, 'index'])->name("admins.demande")->middleware("auth");
-    Route::get('/traiter', [DemandeController::class, 'index'])->name("admins.demande.liste")->middleware("auth");
+    Route::get('/demandes/nouveaux', [DemandeController::class, 'index'])->name("admins.demande.nouvelle")->middleware("auth");
+    Route::get('demandes/traiter', [DemandeController::class, 'index'])->name("admins.demande.traites")->middleware("auth");
     Route::get('/demande/{id}', [DemandeController::class, 'show'])->name("admins.demande.show")->middleware("auth");
     Route::put('/demande/{id}', [DemandeController::class, 'update'])->name("admins.demande.update")->middleware("auth");
     Route::put('/demandevalidation/{id}', [DemandeController::class, 'updatevalidation'])->name("admins.demande.updatevalidation")->middleware("auth");

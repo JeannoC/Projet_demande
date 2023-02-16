@@ -41,8 +41,8 @@
                         <li class="nav-item ">
                             <a href="#dropdown-db" aria-expanded="true" data-toggle="collapse" class="nav-link"><i class="fa fa-folder text-danger"></i>Les Demandes</a>
                             <ul id="dropdown-db" class="collapse list-unstyled pt-0 ml-4">
-                                <li><a href="{{route('admins.demande')}}" class="dropdown-item {{ (request()->segment(1)== 'nouveaux') ? 'active' : ''}}" ><i class="fa fa-bell"></i><span class="app-menu__label"> Nouveaux</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
-                                <li><a href="{{route('admins.demande.liste')}}" class="dropdown-item {{(request()->segment(1)== 'traiter') ? 'active': ''}}" ><i class="fa fa-user-circle"></i><span class="app-menu__label"> Traités</span></a></li>
+                                <li><a href="{{route('admins.demande.nouvelle')}}" class="dropdown-item {{ (request()->segment(2)== 'nouveaux') ? 'active' : ''}}" ><i class="fa fa-bell"></i><span class="app-menu__label"> Nouveaux</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
+                                <li><a href="{{route('admins.demande.traites')}}" class="dropdown-item {{(request()->segment(2)== 'traiter') ? 'active': ''}}" ><i class="fa fa-user-circle"></i><span class="app-menu__label"> Traités</span></a></li>
                             </ul>
                         </li>
                     @endif

@@ -23,7 +23,7 @@ class CreateDemandeursTable extends Migration
             $table->string('telephone')->default('');
             $table->string('prevalidateur')->default('');
             $table->timestamps();
-            $table->foreignId('users_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
         });
     }

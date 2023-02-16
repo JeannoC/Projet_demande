@@ -33,8 +33,8 @@
                             <tr>
                             <td>{{$key+1}}</td>
                                 <td>{{substr($demand->created_at, 0, 10)}}</td>
-                                <td>{{$demand->users_id->Prenom}}</td>
-                                <td>{{$demand->users_id->name}}</td>
+                                <td>{{$demand->user_id->Prenom}}</td>
+                                <td>{{$demand->user_id->name}}</td>
                                 <td>{{$demand->type_demande}}</td>
                                 <td>{{$demand->demandeurs_id->genre}}</td>
                                 <td>{{$demand->demandeurs_id->date_naissance}}</td>

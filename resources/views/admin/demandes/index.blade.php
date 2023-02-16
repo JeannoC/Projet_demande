@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered" id="sampleTable">
+                            <table class="table table-striped table-bordered table-hover" id="sampleTable">
                                 <thead>
                                     <th>N°</th>
                                     <th>Date demande</th>
@@ -32,16 +32,16 @@
                                     <th>{{$segments=="nouveaux" ? 'Valider': 'Status'}}</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($demande as $key=> $demand)
+                                    @foreach($demandes as $key=> $demand)
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{substr($demand->created_at, 0, 10)}}</td>
-                                        <td>{{$demand->users_id->Prenom}}</td>
-                                        <td>{{$demand->users_id->name}}</td>
-                                        <td>{{$demand->type_demande}}</td>
-                                        <td>{{$demand->demandeurs_id->genre}}</td>
-                                        <td>{{$demand->demandeurs_id->date_naissance}}</td>
-                                        <td>{{$demand->demandeurs_id->lieu_naissance}}</td>
+                                        <td>{{$demand->demandeur->user->prenom}}</td>
+                                        <td>{{$demand->demandeur->user->name}}</td>
+                                        <td>{{Str::upper($demand->type_demande)}}</td>
+                                        <td>{{$demand->demandeur->genre}}</td>
+                                        <td>{{$demand->demandeur->date_naissance}}</td>
+                                        <td>{{$demand->demandeur->lieu_naissance}}</td>
                                         <td>
                                             <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info"><i class="fa fa-folder-open"></i></a>
                                         </td>

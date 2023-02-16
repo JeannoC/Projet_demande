@@ -19,19 +19,18 @@ class DemandeController extends Controller
      */
     public function index(Request $request)
     {
-        $segments =request()->segment(1);
+        $segments =request()->segment(2);
         if($segments == "nouveaux"){
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
-            $demande=Demande::where('isValidated',0)->orderBy('id','DESC')->get();
-            return view('admin.demandes.index',compact('demande','count_demande','segments'));
+            $demandes = Demande::whereNull('isValidated')->orderBy('id','DESC')->get();
         }
         if($segments == "traiter"){
-            $demandeNotif=new NotificationController();
-            $count_demande=$demandeNotif->compteDemande();
-            $demande=Demande::where('isValidated',1)->orderBy('id','DESC')->get();
-            return view('admin.demandes.index',compact('demande','count_demande','segments'));
+            $demandeNotif = new NotificationController();
+            $count_demande = $demandeNotif->compteDemande();
+            $demandes = Demande::whereNotNull('isValidated')->orderBy('id','DESC')->get();
         }
+        return view('admin.demandes.index',compact('count_demande','segments','demandes'));
 
     }
     public function preValidation(){
@@ -58,7 +57,7 @@ class DemandeController extends Controller
      */
     public function store()
     {
-        $demandeur = Demandeur::where('users_id',Auth::user()->id)->first();
+        $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
         $demande = new Demande();
         $demande->type_demande = 'attestation';
         $demande->demandeur_id = $demandeur->id;
@@ -69,7 +68,7 @@ class DemandeController extends Controller
 
     public function storepasser()
     {
-        $demandeur = Demandeur::where('users_id',Auth::user()->id)->first();
+        $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
         $demande = new Demande();
         $demande->type_demande = 'laisser passer';
         $demande->demandeur_id = $demandeur->id;
@@ -124,8 +123,9 @@ class DemandeController extends Controller
     {
 
         $demande=Demande::FindOrFail($id);
-        $demande->admin_id = Auth::user()->id;
-        $demande->prevalitation=1;
+        // $demande->user_id = Auth::user()->id;
+        $demande->isValidated = True;
+        $demande->validated_at = date('Y-m-d');
         $demande->update();
         toastr()->success('Validation éffectuée avec succèss');
         return back();
