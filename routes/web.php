@@ -43,8 +43,8 @@ Route::group(["namespace" => "front"], function(){
     Route::get('/attestation', [FrontedController::class,'attestation'])->name("attestation")->middleware("auth");
     Route::post('/completprofil', [DemandeursController::class,'store'])->name("demandeursoumis")->middleware("auth");
     Route::get('/completprofil', [DemandeursController::class,'completprofil'])->name("completprofil")->middleware("auth");
-    Route::post('/demande/demandeattestation', [DemandeController::class,'store'])->name("demandeattestation")->middleware("auth");
-    Route::post('/demande/demandelaisserpasser', [DemandeController::class,'storepasser'])->name("demandelaisserpasser")->middleware("auth");
+    Route::post('/demande/attestation', [DemandeController::class,'store'])->name("demande.attestation")->middleware("auth");
+    Route::post('/demande/laisserpasser', [DemandeController::class,'storepasser'])->name("demande.laisserpasser")->middleware("auth");
 });
 
 Route::group(["namespace" => "admins"], function(){
