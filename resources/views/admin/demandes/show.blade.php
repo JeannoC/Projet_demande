@@ -22,7 +22,6 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-bordy">
-
                                 <div class="col-md-4">
                                     <p><strong class="titre_demande">Prénom et nom :</strong> {{$demande->prenom ." ".$demande->name}}</p>
                                 </div>
