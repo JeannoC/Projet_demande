@@ -41,8 +41,8 @@
                         <li class="nav-item ">
                             <a href="#dropdown-db" aria-expanded="true" data-toggle="collapse" class="nav-link"><i class="fa fa-folder text-danger"></i>Les Demandes</a>
                             <ul id="dropdown-db" class="collapse list-unstyled pt-0 ml-4">
-                                <li><a href="{{route('admins.demande')}}" class="dropdown-item {{ (request()->segment(1)== 'nouveaux') ? 'active' : ''}}" ><i class="fa fa-bell"></i><span class="app-menu__label"> Nouveaux</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
-                                <li><a href="{{route('admins.demande.liste')}}" class="dropdown-item {{(request()->segment(1)== 'traiter') ? 'active': ''}}" ><i class="fa fa-user-circle"></i><span class="app-menu__label"> Traités</span></a></li>
+                                <li><a href="{{route('admins.demande.nouvelle')}}" class="dropdown-item {{ (request()->segment(2)== 'nouveaux') ? 'active' : ''}}" ><i class="fa fa-bell"></i><span class="app-menu__label"> Nouveaux</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
+                                <li><a href="{{route('admins.demande.traites')}}" class="dropdown-item {{(request()->segment(2)== 'traiter') ? 'active': ''}}" ><i class="fa fa-user-circle"></i><span class="app-menu__label"> Traités</span></a></li>
                             </ul>
                         </li>
                     @endif
@@ -101,14 +101,14 @@
                 <div class="col-lg-6">
                     <div class="copyright text-center  text-lg-left  text-muted">
                         © 2021 Made with
-                        <a href="https://www.creative-tim.com/product/argon-dashboard" class="font-weight-bold ml-1" target="_blank">Argon Dashboard</a>
-                        &amp;<a href="https://www.loopple.com" class="font-weight-bold ml-1" target="_blank">Loopple</a>
+                        <a href="https://www.creative-tim.com/product/argon-dashboard" class="font-weight-bold ml-1" target="_blank"></a>
+                        &amp;<a href="https://www.loopple.com" class="font-weight-bold ml-1" target="_blank"></a>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
-    <div class="loopple-badge">Made with<a href="https://www.loopple.com"><img src="https://www.loopple.com/img/loopple-logo.png" class="loopple-ml-1" style="width:55px"></a></div>
+    <!-- <div class="loopple-badge">Made with<a href="https://www.loopple.com"><img src="https://www.loopple.com/img/loopple-logo.png" class="loopple-ml-1" style="width:55px"></a></div> -->
     <script src="https://rawcdn.githack.com/Loopple/loopple-public-assets/5cef8f62939eeb089fa26d4c53a49198de421e3d/argon-dashboard/js/vendor/jquery.min.js"></script>
     <script src="https://rawcdn.githack.com/Loopple/loopple-public-assets/5cef8f62939eeb089fa26d4c53a49198de421e3d/argon-dashboard/js/vendor/bootstrap.bundle.min.js"></script>
     <script src="https://rawcdn.githack.com/Loopple/loopple-public-assets/5cef8f62939eeb089fa26d4c53a49198de421e3d/argon-dashboard/js/vendor/js.cookie.js"></script>

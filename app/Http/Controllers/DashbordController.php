@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Demande;
+use App\Models\Demandeur;
 use App\Http\Controllers\NotificationController;
+use Illuminate\Support\Facades\Auth;
+
 class DashbordController extends Controller
 {
     /**
@@ -15,12 +18,17 @@ class DashbordController extends Controller
      */
     public function index()
     {
-        // $count_demande = User::where('demande',1)->count();
-
         $demandeNotif = new NotificationController();
         $count_demande = 0; //$demandeNotif->compteDemande();
-
-        return view('admin.dashbords.index', compact('count_demande'));
+        if(Auth::user()->hasRole('admin')){
+            $demandes = Demande::paginate(10);
+        }
+        if(Auth::user()->hasRole('demandeur')){
+            $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
+            $demandes = Demande::where('demandeur_id',$demandeur->id)->get();
+            $last_demande = $demandes->last(); 
+        }
+        return view('admin.dashbords.index', compact('count_demande','demandes','last_demande','demandeur'));
     }
 
     /**
