@@ -20,7 +20,7 @@ class DemandeController extends Controller
         if($segments == "nouveaux"){
             $demandeNotif=new NotificationController();
             $count_demande=$demandeNotif->compteDemande();
-            $demande=Demande::where('isValidated',0)->orderBy('id','DESC')->get();
+            $demande=Demande::all();
             return view('admin.demandes.index',compact('demande','count_demande','segments'));
         }
         if($segments == "traiter"){
@@ -127,7 +127,7 @@ class DemandeController extends Controller
 
         if($demande)
         {
-            return view('admin.demande.show',compact('demande','count_demande'));
+            return view('admin.demandes.show',compact('demande','count_demande'));
         }else{
             return back();
         }

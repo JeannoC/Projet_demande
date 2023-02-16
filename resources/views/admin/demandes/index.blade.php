@@ -36,12 +36,12 @@
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{substr($demand->created_at, 0, 10)}}</td>
-                                        <td>{{$demand->users_id->Prenom}}</td>
-                                        <td>{{$demand->users_id->name}}</td>
+                                        <td>{{$demand->prenom}}</td>
+                                        <td>{{$demand->name}}</td>
                                         <td>{{$demand->type_demande}}</td>
-                                        <td>{{$demand->demandeurs_id->genre}}</td>
-                                        <td>{{$demand->demandeurs_id->date_naissance}}</td>
-                                        <td>{{$demand->demandeurs_id->lieu_naissance}}</td>
+                                        <td>{{$demand->genre}}</td>
+                                        <td>{{$demand->date_naissance}}</td>
+                                        <td>{{$demand->lieu_naissance}}</td>
                                         <td>
                                             <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info"><i class="fa fa-folder-open"></i></a>
                                         </td>
