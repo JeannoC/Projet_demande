@@ -22,13 +22,15 @@ class DashbordController extends Controller
         $count_demande = 0; //$demandeNotif->compteDemande();
         if(Auth::user()->hasRole('admin')){
             $demandes = Demande::paginate(10);
+            return view('admin.dashbords.index', compact('count_demande','demandes'));
+
         }
         if(Auth::user()->hasRole('demandeur')){
             $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
             $demandes = Demande::where('demandeur_id',$demandeur->id)->get();
-            $last_demande = $demandes->last(); 
+            $last_demande = $demandes->last();
+            return view('admin.dashbords.index', compact('count_demande','demandes','last_demande','demandeur'));
         }
-        return view('admin.dashbords.index', compact('count_demande','demandes','last_demande','demandeur'));
     }
 
     /**

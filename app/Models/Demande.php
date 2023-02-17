@@ -13,4 +13,8 @@ class Demande extends Model
     {
         return $this->belongsTo(Demandeur::class);
     }
+    public function demandeutilisateur()
+    {
+        return $this->hasMany(DemandeUtilisateur::class);
+    }
 }

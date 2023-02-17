@@ -45,51 +45,51 @@
     </div>
        @endif
         <div class="tile">
-        <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="sampleTable">
-                    <thead>
-                        <tr>
-                            <th>N°</th>
-                            <th>NOM </th>
-                            <th>PRENOM</th>
-                            <th>EMAIL</th>
-                            @if (Auth::user()->hasPermission('createUser'))
-                            <th>ACTIONS</th>
-                            @endif
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $id = 1;?>
-                        @foreach($users as $user)
-                        <tr>
-                            <td>{{$id++}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->prenom}}</td>
-                            <td>{{$user->email}}</td>
-                            @if (Auth::user()->hasPermission('createUser'))
-                            <td class="text-xs-center">
-                                @if($user->statuts==1)
-                                <form action="{{url('suspendre/'.$user->id)}}" method="post">
-                                    {{@csrf_field()}}
-                                    {{method_field('put')}}
-                                    <button class="btn btn-info" ><i class="fa fa-unlock"></i></button>
-                                </form>
-                                @else
-                                <form action="{{url('desuspendre/'.$user->id)}}" method="post">
-                                    {{@csrf_field()}}
-                                    {{method_field('put')}}
-                                    <button class="btn btn-info" ><i class="fa fa-lock"></i></button>
-                                </form>
+            <div class="card table-responsive">
+                    <table class="table table-striped table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>NOM </th>
+                                <th>PRENOM</th>
+                                <th>EMAIL</th>
+                                @if (Auth::user()->hasPermission('createUser'))
+                                <th>ACTIONS</th>
                                 @endif
-                            </td>
-                            @endif
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $id = 1;?>
+                            @foreach($users as $user)
+                            <tr>
+                                <td>{{$id++}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->prenom}}</td>
+                                <td>{{$user->email}}</td>
+                                @if (Auth::user()->hasPermission('createUser'))
+                                <td class="text-xs-center">
+                                    @if($user->statuts==1)
+                                    <form action="{{url('suspendre/'.$user->id)}}" method="post">
+                                        {{@csrf_field()}}
+                                        {{method_field('put')}}
+                                        <button class="btn btn-info" ><i class="fa fa-unlock"></i></button>
+                                    </form>
+                                    @else
+                                    <form action="{{url('desuspendre/'.$user->id)}}" method="post">
+                                        {{@csrf_field()}}
+                                        {{method_field('put')}}
+                                        <button class="btn btn-info" ><i class="fa fa-lock"></i></button>
+                                    </form>
+                                    @endif
+                                </td>
+                                @endif
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </div>
 </main>
 @endsection
