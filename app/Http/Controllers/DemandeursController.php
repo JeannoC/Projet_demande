@@ -49,7 +49,7 @@ class DemandeursController extends Controller
    }
 
    public function profile(){
-    $ldemande = Demandeur::where('users_id',Auth::user()->id)->first();
+    $ldemande = Demandeur::where('user_id',Auth::user()->id)->first();
     dd($ldemande);
     return view('demandeur.index',compact('ldemande'));
     }
@@ -60,7 +60,7 @@ class DemandeursController extends Controller
     }
 
     public function completprofil(){
-        $demandeur = Demandeur::where('users_id',Auth::user()->id)->first();
+        $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
         return view('demandeur.completprofil', compact('demandeur'));
     }
 

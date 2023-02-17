@@ -44,7 +44,7 @@ class DocumentDemandeurController extends Controller
                 $document->type_document = 'photo signature';
                 $document->path = $nomImages;
             }
-            $demandeur = Demandeur::where('users_id',Auth::user()->id)->first();
+            $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
             $document->demandeur_id = $demandeur->id;
             $document->save();
             toastr()->success("Document ajouté avec success");
