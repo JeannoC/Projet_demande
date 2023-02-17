@@ -67,7 +67,7 @@
             <div class="row col-10 center">
                 <fieldset class="h1 ">Veuillez ajouter vos documents</fieldset>
             <br><br>
-            <form action="{{route('demandeursoumis')}}" method="post" enctype="multipart/form-data" >
+            <form action="{{route('demande.document')}}" method="post" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-row">
                     <div class="file-upload col-6">

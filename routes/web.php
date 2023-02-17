@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontedController;
 use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\DemandeursController;
+use App\Http\Controllers\DocumentDemandeurController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\MailController;
 use App\Models\Demande;
@@ -41,6 +42,7 @@ Route::group(["namespace" => "front"], function(){
     Route::get('/completprofil', [DemandeursController::class,'completprofil'])->name("completprofil")->middleware("auth");
     Route::post('/demande/attestation', [DemandeController::class,'store'])->name("demande.attestation")->middleware("auth");
     Route::post('/demande/laisserpasser', [DemandeController::class,'storepasser'])->name("demande.laisserpasser")->middleware("auth");
+    Route::post('/demande/document', [DocumentDemandeurController::class,'store'])->name("demande.document")->middleware("auth");
 });
 
 Route::group(["namespace" => "admins"], function(){
