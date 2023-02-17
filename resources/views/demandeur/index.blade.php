@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class="title">
-                @if ($last_demande->isValidated !== null)
+                @if ($last_demande->isValidated != null)
                     <p>Si vous voulez faire une demande veuillez choisir votre demande ci-dessous</p>
                 @elseif($last_demande)
                     <p class="text-warning">Votre demande est en cours traitement </p>

@@ -48,15 +48,24 @@ class DemandeursController extends Controller
     }
    }
 
-   public function profile(){
-    $ldemande = Demandeur::where('user_id',Auth::user()->id)->first();
-    dd($ldemande);
-    return view('demandeur.index',compact('ldemande'));
+    public function profile(){
+        $ldemande = Demandeur::where('user_id',Auth::user()->id)->first();
+        return view('demandeur.index',compact('ldemande'));
     }
-
     public function index(Request $request){
         $segment = $request->segment(2);
-        return view('demandeur.index',compact('segment','ldemande','listedemande'));
+        $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
+        if($segment == 'attestations'){
+            $demandes = Demande::where('demandeur_id',$demandeur->id)->where('type_demande','attestation')->get();
+            $last_demande = $demandes->last(); 
+        }elseif($segment == "laisser-passer"){
+            $demandes = Demande::where('demandeur_id',$demandeur->id)->where('type_demande','laisser passer')->get();
+            $last_demande = $demandes->last();
+        }else{
+            $demandes = Demande::where('demandeur_id',$demandeur->id)->get();
+            $last_demande = $demandes->last();
+        }
+        return view('demandeur.index',compact('segment','demandes','last_demande'));
     }
 
     public function completprofil(){
