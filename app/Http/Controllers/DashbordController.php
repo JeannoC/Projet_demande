@@ -28,7 +28,8 @@ class DashbordController extends Controller
         }
         if(Auth::user()->hasRole('demandeur')){
             $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
-            $demandes = Demande::where('demandeur_id',$demandeur->id)->get();
+            
+            $demandes = $demandeur ? Demande::where('demandeur_id',$demandeur->id)->get() : [];
             $last_demande = $demandes->last(); 
             return view('admin.dashbords.index',compact('last_demande','demandeur','count_demande','demandes'));
         }

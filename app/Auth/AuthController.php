@@ -46,6 +46,7 @@ class AuthController extends Controller
             'email' => 'bail|required|email|max:255|unique:users',
             'password' => 'bail|required',
         ]);
+
         if($validation->fails()){
             return redirect()->back()->withErrors($validation)->withInput();
         }
@@ -58,7 +59,13 @@ class AuthController extends Controller
             $user->save();
             $user->attachRole('utilisateur');
             toastr()->success("Création du compte effectuée avec success");
-            return redirect()->route('dashbord.index');
+            $credentials = $request->only('email', 'password');
+
+            if (Auth::Attempt($credentials))
+            {
+                return redirect()->route('dashbord.index');
+            }
+            return redirect()->back()->withErrors('Erreur d\'authentification.');
         }
     }
 
