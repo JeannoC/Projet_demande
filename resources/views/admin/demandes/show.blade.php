@@ -44,12 +44,23 @@
                     <div class="col-md-4">
                         <p><strong class="titre_demande">Filiation de la mère :</strong> {{$demande->demandeur->nom_mere}}</p>
                     </div>
-                    <div class="col-6">
-                        <p><strong class="titre_demande">Photo :</strong> <img src="{{asset('img/images/'.$demande->photo)}}" alt="" width="90%"></p>
-                    </div>
-                    <div class="col-6">
-                        <p><strong class="titre_demande">Photo Signature :</strong> <img src="{{asset('img/imageSignature/'.$demande->photo_signature)}}" alt="" width="90%"></p>
-                    </div>
+                    @if($document)
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2>Liste des ces documents</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach($document as $key=> $docum)
+                                <div class="col-6">
+                                    <p><strong class="titre_demande">Photo :</strong> <img src="{{asset('img/images/'.$docum->name)}}" alt="" width="90%"></p>
+                                </div>
+                                <div class="col-6">
+                                    <p><strong class="titre_demande">Photo Signature :</strong> <img src="{{asset('img/imageSignature/'.$docu->file_name)}}" alt="" width="90%"></p>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
                 <form action="{{route('admins.demande.update',$demande->id)}}" method="post">
                     @csrf

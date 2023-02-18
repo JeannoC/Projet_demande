@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Demande;
 use App\Models\DemandeUtilisateur;
+use App\Models\DocumentDemandeur;
 use Nette\Utils\Random;
 use App\Models\Demandeur;
 use Illuminate\Support\Facades\Auth;
@@ -90,15 +91,26 @@ class DemandeController extends Controller
     public function show($id)
     {
         $demande = Demande::find($id);
+        $demandeur = $demande->demandeur->user->id;
+        $document = DocumentDemandeur::where('demandeur_id',$demandeur)->first();
         $demandeNotif = new NotificationController();
         $count_demande = 0; //$demandeNotif->compteDemande();
 
         if($demande)
         {
-            return view('admin.demandes.show',compact('demande','count_demande'));
+            return view('admin.demandes.show',compact('demande','count_demande','document'));
         }else{
             return back();
         }
+
+    }
+
+    public function demandeutilisateur(){
+        $segments =request()->segment(1);
+        $demandeNotif=new NotificationController();
+        $count_demande=$demandeNotif->compteDemande();
+        $demandeuser = DemandeUtilisateur::where('user_id', Auth::user()->id)->get();
+        return view('admin.demandes.demandeuser',compact('demandeuser','count_demande','segments'));
 
     }
 
@@ -122,11 +134,18 @@ class DemandeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $demande=Demande::FindOrFail($id);
-        $demande->isValidated = True;
-        $demande->validated_at = date('Y-m-d');
-        $demande->update();
-
+        if(Auth::user()->hasRole('pdg')){
+            $demande=Demande::FindOrFail($id);
+            $demande->isValidated = True;
+            $demande->isAccepted = True;
+            $demande->validated_at = date('Y-m-d');
+            $demande->update();
+        }else{
+            $demande=Demande::FindOrFail($id);
+            $demande->isValidated = True;
+            $demande->validated_at = date('Y-m-d');
+            $demande->update();
+        }
         $demandeuser =new DemandeUtilisateur();
         $demandeuser->user_id = Auth::user()->id;
         $demandeuser->demande_id = $demande->id;

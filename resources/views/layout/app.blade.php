@@ -45,6 +45,7 @@
                                 <li><a href="{{route('admins.demande.traites')}}" class="dropdown-item {{(request()->segment(2)== 'traiter') ? 'active': ''}}" ><i class="fa fa-user-circle"></i><span class="app-menu__label"> Traités</span></a></li>
                             </ul>
                         </li>
+                        <li class="nav-item"><a class="nav-link {{(request()->segment(1)== 'prevalidation') ? 'active': ''}}" href="{{route('admins.demande.utilisateur')}}"><i class="fa fa-user"></i><span class="app-menu__label">Mes demandes traitées</span></a></li>
                     @endif
                     @if (Auth::user()->hasPermission('valider'))
                         <li class="nav-item"><a class="nav-link {{(request()->segment(1)== 'prevalidation') ? 'active': ''}}" href="{{route('admins.preValidation')}}"><i class="fa fa-user"></i><span class="app-menu__label">Pre validation</span></a></li>
