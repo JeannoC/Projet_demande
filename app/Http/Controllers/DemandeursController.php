@@ -38,6 +38,7 @@ class DemandeursController extends Controller
         $demandeur->user_id = Auth::user()->id;
         $demandeur->genre =  $request->genre;
         $demandeur->save();
+        Auth::user()->attachRole('demandeur');
 
         if($demandeur == null){
             toastr()->success("Votre compte a été completer avec succès ");
@@ -53,10 +54,13 @@ class DemandeursController extends Controller
         $ldemande = Demandeur::where('user_id',Auth::user()->id)->first();
         return view('demandeur.index',compact('ldemande'));
     }
+
     public function index(Request $request){
         $segment = $request->segment(2);
         $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
+        $document = DocumentDemandeur::where('demandeur_id',$demandeur->id)->first();
         if($segment == 'attestations'){
+            $document = DocumentDemandeur::where('demandeur_id',$demandeur->id)->first();
             $demandes = Demande::where('demandeur_id',$demandeur->id)->where('type_demande','attestation')->get();
             $last_demande = $demandes->last(); 
         }elseif($segment == "laisser-passer"){
@@ -66,14 +70,18 @@ class DemandeursController extends Controller
             $demandes = Demande::where('demandeur_id',$demandeur->id)->get();
             $last_demande = $demandes->last();
         }
-        return view('demandeur.index',compact('segment','demandes','last_demande'));
+        return view('demandeur.index',compact('segment','demandes','last_demande','document'));
     }
 
     public function completprofil(){
+        if(Auth::user()->hasRole('demandeur')){
+            $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
+            $document = DocumentDemandeur::where('demandeur_id',$demandeur->id)->first();
+            $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
+            return view('demandeur.completprofil',compact('demandeur','document'));
+        }
         $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
-        $document = DocumentDemandeur::where('demandeur_id',$demandeur->id)->first();
-        $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
-        return view('demandeur.completprofil', compact('demandeur','document'));
+        return view('demandeur.completprofil',compact('demandeur'));
     }
 
 

@@ -7,7 +7,11 @@
         <ul class="nav nav-pills">
           <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Profil</a></li>
           <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Documents</a></li>
-          <li class="nav-item"><a class="nav-link" href="#detail" data-toggle="tab">Detail</a></li>
+            @if (Auth::user()->hasRole('demandeur'))
+                @if ($document)
+                    <li class="nav-item"><a class="nav-link" href="#detail" data-toggle="tab">Detail</a></li>
+                @endif
+            @endif
         </ul>
       </div>
       <div class="card-body">
@@ -108,22 +112,26 @@
             </form>
             </div>
           </div>
-            <div class="tab-pane" id="detail">
-                <div class="row col-10 center">
-                    <fieldset class="h1 ">Vos Documents</fieldset>
-                    <div class="row">
-                        <div class="col-md-12">
-                                    <div class="col-6">
-                                        <p><strong class="titre_demande">Photo :</strong> <img src="{{asset('img/images/'.$document->name)}}" alt="" width="90%"></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p><strong class="titre_demande">Photo Signature :</strong> <img src="{{asset('img/imageSignature/'.$document->filename)}}" alt="" width="90%"></p>
-                                    </div>
+           @if (Auth::user()->hasRole('demandeur'))
+                @if ($document)
+                <div class="tab-pane" id="detail">
+                    <div class="row col-10 center">
+                        <fieldset class="h1 ">Vos Documents</fieldset>
+                        <div class="row">
+                            <div class="col-md-12">
+                                        <div class="col-6">
+                                            <p><strong class="titre_demande">Photo :</strong> <img src="{{asset('img/images/'.$document->name)}}" alt="" width="90%"></p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p><strong class="titre_demande">Photo Signature :</strong> <img src="{{asset('img/imageSignature/'.$document->filename)}}" alt="" width="90%"></p>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                @endif
+           @endif
         </div>
       </div>
     </div>

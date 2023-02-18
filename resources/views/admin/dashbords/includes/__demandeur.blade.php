@@ -1,5 +1,6 @@
+@if (Auth::user()->hasRole('demandeur'))
 <div class="row">
-    <div class="col-2">
+    <div class="col-3">
         <form action="{{route('demande.attestation')}}" method="post" enctype="multipart/form-data" >
             @csrf
             @if (!$last_demande)
@@ -25,7 +26,7 @@
             </div>
         </form>
     </div>
-    <div class="col-2">
+    <div class="col-3">
         <form action="{{route('demande.laisserpasser')}}" method="post" enctype="multipart/form-data" >
             @csrf
             @if(!$last_demande)
@@ -119,3 +120,8 @@
         </div>
     </div>
 </div>
+@else
+<a href="{{route('completprofil')}}">
+<button type="button"  class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal" style="background-color: rgb(238, 8, 8); border:none">Veuillez completer votre profil</button>
+</a>
+@endif

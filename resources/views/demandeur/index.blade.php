@@ -1,6 +1,6 @@
 @extends('layout.app')
 @section('content')
-<div class="pt-3">
+<div class="row pt-3">
     <div class="row">
         <div class="col-12">
             <div class="title">
@@ -71,7 +71,7 @@
         </div>
     </div>
     <br>
-    <div class="row ">
+    <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header border-0">
@@ -112,4 +112,5 @@
             </table>
         </div>
     </div>
+    
 @endsection

@@ -2,7 +2,7 @@
     <div class="col-md-2 col-lg-4 col-4">
         <div class="card">
             <div class="card-body">
-                <h1>Demandes encours de traitements: {{$count_demande}}</h1>
+                <h1>Demandes en cours de traitements: {{$count_demande}}</h1>
             </div>
         </div>
     </div>
