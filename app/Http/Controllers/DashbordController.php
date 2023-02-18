@@ -20,6 +20,9 @@ class DashbordController extends Controller
     {
         $demandeNotif = new NotificationController();
         $count_demande = 0; //$demandeNotif->compteDemande();
+        $demandes = [];
+        $last_demande = null;
+        $demandeur = null;
         if(Auth::user()->hasRole('admin')){
             $demandes = Demande::paginate(10);
         }
