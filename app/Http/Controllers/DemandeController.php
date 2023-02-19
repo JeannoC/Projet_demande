@@ -49,6 +49,7 @@ class DemandeController extends Controller
 
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -62,8 +63,7 @@ class DemandeController extends Controller
         $demande->type_demande = 'attestation';
         $demande->demandeur_id = $demandeur->id;
         $demande->save();
-        toastr()->success('Demande effectué avec succès');
-        return back();
+        return back()->with(['success'=>'Demande effectué avec succès']);
     }
 
     public function storepasser()
@@ -73,8 +73,7 @@ class DemandeController extends Controller
         $demande->type_demande = 'laisser passer';
         $demande->demandeur_id = $demandeur->id;
         $demande->save();
-        toastr()->success('Demande effectué avec succès');
-        return back();
+        return back()->with(['success'=>'Demande effectué avec succès']);
     }
 
 

@@ -52,11 +52,9 @@ class DocumentDemandeurController extends Controller
             $document->demandeur_id = $demandeur->id;
             $document->save();
             if($document == null){
-                toastr()->success("Votre document à été ajouter avec succès ");
-                return redirect()->back();
+                return redirect()->back()->with(['success'=>'Votre document à été ajouter avec succès']);
             }else{
-                toastr()->success("Votre document à été modifier avec succès ");
-                return redirect()->back();
+                return redirect()->back()->with(['success'=>'Votre document à été modifier avec succès']);
             }
 
         }

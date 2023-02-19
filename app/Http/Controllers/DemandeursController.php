@@ -29,23 +29,26 @@ class DemandeursController extends Controller
         $demandeur = Demandeur::where('user_id', Auth::user()->id)->first();
         if($demandeur == null){
             $demandeur = new Demandeur();
-        }
-        $demandeur->telephone = $request->telephone;
-        $demandeur->nom_pere = $request->nom_pere;
-        $demandeur->nom_mere = $request->nom_mere;
-        $demandeur->lieu_naissance = $request->lieu_naissance;
-        $demandeur->date_naissance = $request->date_naissance;
-        $demandeur->user_id = Auth::user()->id;
-        $demandeur->genre =  $request->genre;
-        $demandeur->save();
-        Auth::user()->attachRole('demandeur');
-
-        if($demandeur == null){
-            toastr()->success("Votre compte a été completer avec succès ");
-            return redirect()->back();
+            $demandeur->telephone = $request->telephone;
+            $demandeur->nom_pere = $request->nom_pere;
+            $demandeur->nom_mere = $request->nom_mere;
+            $demandeur->lieu_naissance = $request->lieu_naissance;
+            $demandeur->date_naissance = $request->date_naissance;
+            $demandeur->user_id = Auth::user()->id;
+            $demandeur->genre =  $request->genre;
+            $demandeur->save();
+            Auth::user()->attachRole('demandeur');
+            return redirect()->back()->with(['success'=>'Votre compte a été completer avec succès']);
         }else{
-            toastr()->success("Votre compte a été modifier avec succès ");
-            return redirect()->back();
+            $demandeur->telephone = $request->telephone;
+            $demandeur->nom_pere = $request->nom_pere;
+            $demandeur->nom_mere = $request->nom_mere;
+            $demandeur->lieu_naissance = $request->lieu_naissance;
+            $demandeur->date_naissance = $request->date_naissance;
+            $demandeur->user_id = Auth::user()->id;
+            $demandeur->genre =  $request->genre;
+            $demandeur->update();
+            return redirect()->back()->with(['success'=>'Votre profil a été modifier avec succès']);
         }
     }
    }
@@ -62,7 +65,7 @@ class DemandeursController extends Controller
         if($segment == 'attestations'){
             $document = DocumentDemandeur::where('demandeur_id',$demandeur->id)->first();
             $demandes = Demande::where('demandeur_id',$demandeur->id)->where('type_demande','attestation')->get();
-            $last_demande = $demandes->last(); 
+            $last_demande = $demandes->last();
         }elseif($segment == "laisser-passer"){
             $demandes = Demande::where('demandeur_id',$demandeur->id)->where('type_demande','laisser passer')->get();
             $last_demande = $demandes->last();

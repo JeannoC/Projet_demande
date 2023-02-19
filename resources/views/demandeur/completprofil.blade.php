@@ -1,6 +1,5 @@
 @extends('layout.app')
 @section('content')
-@include('demandeur.frontdemandeur')
 <div class="col-12">
     <div class="card">
       <div class="card-header p-2">
@@ -20,6 +19,9 @@
             <div class="row col-10 center">
                 <fieldset class="h1 ">Veuillez completer votre profil</fieldset>
             <br><br>
+            @if(session()->has('success'))
+            <div class="alert alert-success col-12">{{session('success')}} </div>
+            @endif
             <form action="{{route('demandeursoumis')}}" method="post" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-row">
@@ -75,36 +77,16 @@
             <form action="{{route('demande.document')}}" method="post" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-row">
-                    <div class="file-upload col-6">
-                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ajout Photo</button>
-                        <div class="image-upload-wrap">
-                          <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="images"/>
-                          <div class="drag-text">
-                            <h3>Faites glisser et déposez ou sélectionnez ajouter une image</h3>
-                          </div>
-                        </div>
-                        <div class="file-upload-content">
-                          <img class="file-upload-image" src="#" alt="your image" />
-                          <div class="image-title-wrap">
-                            <button type="button" onclick="removeUpload()" class="remove-image">Suprimer <span class="image-title">Uploaded Image</span></button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="file-upload  col-6">
-                          <button class="file-upload-btn" type="button" onclick="$('.file-upload-inputs').trigger( 'click' )">Ajout Photo Signature</button>
-                          <div class="image-upload-wraps">
-                            <input class="file-upload-inputs" type='file' onchange="readURLS(this);" accept="image/*" name="image_signature"/>
-                            <div class="drag-text">
-                              <h3>Faites glisser et déposez ou sélectionnez ajouter une image</h3>
-                            </div>
-                          </div>
-                          <div class="file-upload-contents">
-                            <img class="file-upload-images" src="#" alt="your image" />
-                            <div class="image-title-wrap">
-                              <button type="button" onclick="removeUploads()" class="remove-image">Suprimer <span class="image-title">Uploaded Image</span></button>
-                            </div>
-                          </div>
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label>Photo*</label>
+                        <input type="file" name="images"  class="form-control  @error('images') is-invalid @enderror">
+                        @error('images')<span class="text text-danger">{{$message}}</span>@enderror
+                    </div>
+                     <div class="form-group col-md-6">
+                        <label>Photo signature*</label>
+                        <input type="file" name="image_signature"  class="form-control  @error('image_signature') is-invalid @enderror">
+                        @error('image_signature')<span class="text text-danger">{{$message}}</span>@enderror
+                    </div>
                     <div class="form-group col-md-12 mt-5">
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
@@ -116,17 +98,20 @@
                 @if ($document)
                 <div class="tab-pane" id="detail">
                     <div class="row col-10 center">
-                        <fieldset class="h1 ">Vos Documents</fieldset>
+                        <p class="h1 ">Vos Documents</p>
                         <div class="row">
-                            <div class="col-md-12">
-                                        <div class="col-6">
-                                            <p><strong class="titre_demande">Photo :</strong> <img src="{{asset('img/images/'.$document->name)}}" alt="" width="90%"></p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p><strong class="titre_demande">Photo Signature :</strong> <img src="{{asset('img/imageSignature/'.$document->filename)}}" alt="" width="90%"></p>
-                                        </div>
+                            <div class="card mr-3" style="width: 18rem;">
+                                <img src="{{asset('img/images/'.$document->name)}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                  <p class="card-text">Photo d'identité</p>
                                 </div>
-                            </div>
+                              </div>
+                              <div class="card" style="width: 18rem;">
+                                <img src="{{asset('img/imageSignature/'.$document->filename)}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                  <p class="card-text">Photo de signature</p>
+                                </div>
+                              </div>
                         </div>
                     </div>
                 </div>

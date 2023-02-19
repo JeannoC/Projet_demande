@@ -57,8 +57,13 @@ class AuthController extends Controller
             $user->password=bcrypt($request->password);
             $user->save();
             $user->attachRole('utilisateur');
-            toastr()->success("Création du compte effectuée avec success");
-            return redirect()->route('dashbord.index');
+            $credentials = $request->only('email', 'password');
+            if (Auth::Attempt($credentials))
+            {
+            return redirect()->route('dashbord.index')->with(['success'=>'Création du compte effectuée avec success']);
+            }else{
+                return redirect()->back();   
+            }
         }
     }
 

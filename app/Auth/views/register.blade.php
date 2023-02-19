@@ -27,21 +27,28 @@
         <form  class="login-form" action="{{route('register')}}"  method="POST">
             @csrf
           <h3 class="login-head">INSCRIPTION</h3>
+          @if(session()->has('error'))
+          <div class="alert alert-danger">{{session('error')}}</div>
+          @endif
           <div class="form-group">
             <label class="control-label">NOM</label>
-            <input class="form-control" type="text" name="name" autofocus>
+            <input class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" type="text" name="name" autofocus>
+            @error('name')<span class="text text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group">
             <label class="control-label">PRENOM</label>
-            <input class="form-control" type="text" name="prenom" autofocus>
+            <input class="form-control  @error('prenom') is-invalid @enderror" value="{{ old('prenom') }}" type="text" name="prenom" autofocus>
+            @error('prenom')<span class="text text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
-            <input class="form-control" type="email" name="email" autofocus>
+            <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" type="email" name="email" autofocus>
+            @error('email')<span class="text text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group">
             <label class="control-label">MOT DE PASSE</label>
-            <input class="form-control" type="password" name="password">
+            <input class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" type="password" name="password">
+            @error('password')<span class="text text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block" style="background: #078a36"><i class="fa fa-sign-in fa-lg fa-fw"></i>Inscription</button>

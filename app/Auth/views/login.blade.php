@@ -33,12 +33,12 @@
           <div class="form-group">
             <label class="control-label">EMAIL</label>
             <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" type="text" name="email" autofocus>
-            @error('name')<span class="text text-danger">{{$message}}</span>@enderror
+            @error('email')<span class="text text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group">
             <label class="control-label">MOT DE PASSE</label>
             <input class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" type="password" name="password">
-            @error('name')<span class="text text-danger">{{$message}}</span>@enderror
+            @error('password')<span class="text text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block" style="background: #078a36"><i class="fa fa-sign-in fa-lg fa-fw"></i>CONNEXION</button>
