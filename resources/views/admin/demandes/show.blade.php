@@ -18,6 +18,36 @@
     </style>
     <div class="row">
         <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Les actions sur cette demande</h2>
+                    <table class="table table-striped table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Nom </th>
+                                <th>PRENOM</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php $id = 1;?>
+                            @foreach($demandeadmin as $key=> $demadmin)
+                                <tr>
+                                    <td>{{$id++}}</td>
+                                    <td>{{$demadmin->user->name}}</td>
+                                    <td>{{$demadmin->user->prenom}}</td>
+                                    <td>{{$demadmin->action}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
         <div class="card">
                 <div class="card-bordy">
                     <div class="col-md-4">

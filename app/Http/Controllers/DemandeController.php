@@ -94,11 +94,12 @@ class DemandeController extends Controller
         $demandeur = $demande->demandeur->user->id;
         $document = DocumentDemandeur::where('demandeur_id',$demandeur)->first();
         $demandeNotif = new NotificationController();
+        $demandeadmin = DemandeUtilisateur::where("demande_id",$id)->get();
         $count_demande = 0; //$demandeNotif->compteDemande();
 
         if($demande)
         {
-            return view('admin.demandes.show',compact('demande','count_demande','document'));
+            return view('admin.demandes.show',compact('demande','count_demande','document','demandeadmin'));
         }else{
             return back();
         }
