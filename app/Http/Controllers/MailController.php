@@ -15,6 +15,6 @@ class MailController extends Controller
         
         Mail::to($gmail)->send(new Signup($nom));
 
-        return redirect()->route('admins.demande');
+        return redirect()->back();
     }
 }

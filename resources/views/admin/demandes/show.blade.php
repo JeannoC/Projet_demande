@@ -18,6 +18,36 @@
     </style>
     <div class="row">
         <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Les actions sur cette demande</h2>
+                    <table class="table table-striped table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Nom </th>
+                                <th>PRENOM</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php $id = 1;?>
+                            @foreach($demandeadmin as $key=> $demadmin)
+                                <tr>
+                                    <td>{{$id++}}</td>
+                                    <td>{{$demadmin->user->name}}</td>
+                                    <td>{{$demadmin->user->prenom}}</td>
+                                    <td>{{$demadmin->action}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
         <div class="card">
                 <div class="card-bordy">
                     <div class="col-md-4">
@@ -44,18 +74,29 @@
                     <div class="col-md-4">
                         <p><strong class="titre_demande">Filiation de la mère :</strong> {{$demande->demandeur->nom_mere}}</p>
                     </div>
-                    <div class="col-6">
-                        <p><strong class="titre_demande">Photo :</strong> <img src="{{asset('img/images/'.$demande->photo)}}" alt="" width="90%"></p>
+                    @if($document)
+                    <div class="tab-pane" id="detail">
+                        <div class="row col-md-10 center">
+                            <p class="h1 ">Liste des doucments</p>
+                            <div class="row">
+                                <div class="card mr-1 col-md-5">
+                                    <img src="{{asset('img/images/'.$document->name)}}" class="card-img-top" alt="...">
+                                    <div class="card-body ">
+                                      <p class="card-text">Photo d'identité</p>
+                                    </div>
+                                  </div>
+                                  <div class="card col-md-5">
+                                    <img src="{{asset('img/imageSignature/'.$document->filename)}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                      <p class="card-text">Photo de signature</p>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <p><strong class="titre_demande">Photo Signature :</strong> <img src="{{asset('img/imageSignature/'.$demande->photo_signature)}}" alt="" width="90%"></p>
-                    </div>
+                    @endif
                 </div>
-                <form action="{{route('admins.demande.update',$demande->id)}}" method="post">
-                    @csrf
-                    {{method_field('put')}}
-                    <button class="btn btn-info" type="submit">Valider</button>
-                </form>
+
             </div>
         </div>
         </div>

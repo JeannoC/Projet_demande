@@ -22,6 +22,7 @@ class DashbordController extends Controller
         $count_demande = 0; //$demandeNotif->compteDemande();
         if(Auth::user()->hasRole('admin')){
             $demandes = Demande::paginate(10);
+            return view('admin.dashbords.index', compact('count_demande','demandes'));
         }
         if(Auth::user()->hasRole('demandeur')){
             $demandeur = Demandeur::where('user_id',Auth::user()->id)->first();
@@ -34,6 +35,7 @@ class DashbordController extends Controller
         }
         return view('admin.dashbords.index', compact('last_demande','demandeur'));
     }
+
 
     /**
      * Show the form for creating a new resource.

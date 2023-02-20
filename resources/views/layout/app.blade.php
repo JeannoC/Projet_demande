@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://rawcdn.githack.com/Loopple/loopple-public-assets/ad60f16c8a16d1dcad75e176c00d7f9e69320cd4/argon-dashboard/css/nucleo/css/nucleo.css">
     <link rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/loopple/loopple.css')}}">
+
+
+
+
+        <link rel="stylesheet" href="{{asset('assets/css/generation/datatables.min.css')}}">
 </head>
 
 <body style="background-color:#f8f9fe">
@@ -44,7 +49,7 @@
                                 <li><a href="{{route('admins.demande.nouvelle')}}" class="dropdown-item {{ (request()->segment(2)== 'nouveaux') ? 'active' : ''}}" ><i class="fa fa-bell"></i><span class="app-menu__label"> Nouveaux</span>@if($count_demande>0)<span class="badge badge-danger">{{$count_demande}}</span>@endif</a></li>
                                 <li><a href="{{route('admins.demande.traites')}}" class="dropdown-item {{(request()->segment(2)== 'traiter') ? 'active': ''}}" ><i class="fa fa-user-circle"></i><span class="app-menu__label"> Traités</span></a></li>
                             </ul>
-                        </li>
+                        </li><li class="nav-item"><a class="nav-link {{(request()->segment(1)== 'prevalidation') ? 'active': ''}}" href="{{route('admins.demande.utilisateur')}}"><i class="fa fa-user"></i><span class="app-menu__label">Mes demandes traitées</span></a></li>
                     @endif
                     @if (Auth::user()->hasPermission('valider'))
                         <li class="nav-item"><a class="nav-link {{(request()->segment(1)== 'prevalidation') ? 'active': ''}}" href="{{route('admins.preValidation')}}"><i class="fa fa-user"></i><span class="app-menu__label">Pre validation</span></a></li>
@@ -129,4 +134,14 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="https://rawcdn.githack.com/Loopple/loopple-public-assets/5cef8f62939eeb089fa26d4c53a49198de421e3d/argon-dashboard/js/vendor/chart.extension.js"></script>
     <script src="https://rawcdn.githack.com/Loopple/loopple-public-assets/7bb803d2af2ab6d71d429b0cb459c24a4cd0fbb4/argon-dashboard/js/argon.min.js"></script>
+
+
+
+    <script src="{{asset('assets/js/generationjs/datatables/datatables.min.js')}}"></script>
+    <script src="{{asset('assets/js/generationjs/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('assets/js/generationjs/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('assets/js/generationjs/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('assets/js/generationjs/datatables/pdfmake.min.js')}}"></script>
+    <script src="{{asset('assets/js/generationjs/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('assets/js/generationjs/datatables/buttons.print.min.js')}}"></script>
 </body>

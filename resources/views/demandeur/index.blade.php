@@ -73,7 +73,7 @@
     <br>
     <div class="row">
         <div class="col-md-12">
-            <div class="tile">
+            <div class="title">
                 <div class="card">
                     <div class="card card-body">
                         <div class="table-responsive">

@@ -50,8 +50,10 @@ Route::group(["namespace" => "admins"], function(){
     Route::get('/dashboard', [DashbordController::class, 'index'])->name("dashbord.index")->middleware("auth");
     Route::get('/demandes/nouveaux', [DemandeController::class, 'index'])->name("admins.demande.nouvelle")->middleware("auth");
     Route::get('demandes/traiter', [DemandeController::class, 'index'])->name("admins.demande.traites")->middleware("auth");
+    Route::get('demandes/utilisateur', [DemandeController::class, 'demandeutilisateur'])->name("admins.demande.utilisateur")->middleware("auth");
     Route::get('/demande/{id}', [DemandeController::class, 'show'])->name("admins.demande.show")->middleware("auth");
-    Route::put('/demande/{id}', [DemandeController::class, 'update'])->name("admins.demande.update")->middleware("auth");
+    Route::put('/demandevalide/{id}', [DemandeController::class, 'update'])->name("admins.demande.update")->middleware("auth");
+    Route::put('/demanderejeter/{id}', [DemandeController::class, 'rejeterupdate'])->name("admins.demande.rejeterupdate")->middleware("auth");
     Route::put('/demandevalidation/{id}', [DemandeController::class, 'updatevalidation'])->name("admins.demande.updatevalidation")->middleware("auth");
     Route::get('/preValidation',[DemandeController::class, 'preValidation'])->name('admins.preValidation')->middleware("auth");
 
@@ -65,7 +67,6 @@ Route::group(["namespace" => "admins"], function(){
     Route::put('users/{id}',[UtilisateurController::class,'update'])->middleware("auth");
     Route::delete('users/{id}',[UtilisateurController::class,'delete'])->middleware("auth");
 });
-
 
 
 Route::group(["namespace" => "Auth"], function(){
