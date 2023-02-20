@@ -1,8 +1,8 @@
 @extends('layout.app')
 @section('content')
-<div class="col-12">
+<div class="col-md-12">
     <div class="card">
-      <div class="card-header p-2">
+      <div class="card-header p-2 col-md-12">
         <ul class="nav nav-pills">
           <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Profil</a></li>
           <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Documents</a></li>
@@ -16,11 +16,11 @@
       <div class="card-body">
         <div class="tab-content">
           <div class="active tab-pane" id="activity">
-            <div class="row col-10 center">
+            <div class="row col-md-10 center">
                 <fieldset class="h1 ">Veuillez completer votre profil</fieldset>
             <br><br>
             @if(session()->has('success'))
-            <div class="alert alert-success col-12">{{session('success')}} </div>
+            <div id="casser" class="alert alert-success col-12">{{session('success')}} </div>
             @endif
             <form action="{{route('demandeursoumis')}}" method="post" enctype="multipart/form-data" >
                 @csrf
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="tab-pane" id="timeline">
-            <div class="row col-10 center">
+            <div class="row col-md-10 center">
                 <fieldset class="h1 ">Veuillez ajouter vos documents</fieldset>
             <br><br>
             <form action="{{route('demande.document')}}" method="post" enctype="multipart/form-data" >
@@ -97,16 +97,16 @@
            @if (Auth::user()->hasRole('demandeur'))
                 @if ($document)
                 <div class="tab-pane" id="detail">
-                    <div class="row col-10 center">
+                    <div class="row col-md-10 center">
                         <p class="h1 ">Vos Documents</p>
                         <div class="row">
-                            <div class="card mr-3" style="width: 18rem;">
+                            <div class="card mr-1 col-md-5">
                                 <img src="{{asset('img/images/'.$document->name)}}" class="card-img-top" alt="...">
-                                <div class="card-body">
+                                <div class="card-body ">
                                   <p class="card-text">Photo d'identité</p>
                                 </div>
                               </div>
-                              <div class="card" style="width: 18rem;">
+                              <div class="card col-md-5">
                                 <img src="{{asset('img/imageSignature/'.$document->filename)}}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                   <p class="card-text">Photo de signature</p>

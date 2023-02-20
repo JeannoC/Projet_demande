@@ -1,6 +1,6 @@
 @if (Auth::user()->hasRole('demandeur'))
 <div class="row">
-    <div class="col-3">
+    <div class="col-md-3">
         <form action="{{route('demande.attestation')}}" method="post" enctype="multipart/form-data" >
             @csrf
             @if (!$last_demande)
@@ -26,15 +26,15 @@
             </div>
         </form>
     </div>
-    <div class="col-3">
+    <div class="col-md-3">
         <form action="{{route('demande.laisserpasser')}}" method="post" enctype="multipart/form-data" >
             @csrf
             @if(!$last_demande)
-                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal" style="background-color: #1AA059; border:none">Laisser Passer</button>
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModals" style="background-color: #1AA059; border:none">Laisser Passer</button>
             @elseif($last_demande->isValidated !== null)
-                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal" style="background-color: #1AA059; border:none">Laisser Passer</button>
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModals" style="background-color: #1AA059; border:none">Laisser Passer</button>
             @endif
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -122,7 +122,7 @@
 </div>
 @else
 @if(session()->has('success'))
-<div class="alert alert-success col-12">{{session('success')}} </div>
+<div id="casser" class="alert alert-success col-12">{{session('success')}} </div>
 @endif
 <a href="{{route('completprofil')}}">
 <button type="button"  class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal" style="background-color: rgb(238, 8, 8); border:none">Veuillez cliquer ici pour completer votre profil</button>

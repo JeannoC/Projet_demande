@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-0">
+        <div class="col-md-3 ">
             @if($segment == 'attestations')
                 <form action="{{route('demande.attestation')}}" method="post" enctype="multipart/form-data" >
                     @csrf
@@ -41,7 +41,7 @@
                 </form>
             @endif
         </div>
-        <div class="col-4">
+        <div class="col-md-3">
             @if($segment == 'laisser-passer')
                 <form action="{{route('demande.laisserpasser')}}" method="post" enctype="multipart/form-data" >
                     @csrf

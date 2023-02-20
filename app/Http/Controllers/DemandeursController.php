@@ -38,6 +38,7 @@ class DemandeursController extends Controller
             $demandeur->genre =  $request->genre;
             $demandeur->save();
             Auth::user()->attachRole('demandeur');
+            Auth::user()->detachRole('utilisateur');
             return redirect()->back()->with(['success'=>'Votre compte a été completer avec succès']);
         }else{
             $demandeur->telephone = $request->telephone;
