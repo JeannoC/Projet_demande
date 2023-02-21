@@ -44,7 +44,16 @@
             <button class="btn btn-primary btn-block" style="background: #078a36"><i class="fa fa-sign-in fa-lg fa-fw"></i>CONNEXION</button>
           </div>
           <br>
-          <p><a href="{{route('register.incription')}}" style="margin-left:80px;">Créer votre compte</a></p>
+          <p>
+          </p>
+          <div class="row">
+            <div class="col-6">
+                <a href="{{route('front.index')}}" style="margin-left:10px;">Page d'accueil</a>
+            </div>
+            <div class="col-6">
+                <a href="{{route('register.incription')}}" style="margin-left:0px;">Créer votre compte</a>
+            </div>
+          </div>
         </form>
       </div>
     </section>

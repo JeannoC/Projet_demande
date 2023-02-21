@@ -92,10 +92,12 @@
                                 <div class="dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">Bienvenue!</h6>
                                 </div>
-                                <a href="{{route('completprofil')}}" class="dropdown-item">
-                                    <i class="fa fa-user"></i>
-                                    <span>Mon Profil</span>
-                                </a>
+                                @if(Auth::user()->hasRole('demandeur'))
+                                    <a href="{{route('completprofil')}}" class="dropdown-item">
+                                        <i class="fa fa-user"></i>
+                                        <span>Mon Profil</span>
+                                    </a>
+                                @endif
                                 <div class="dropdown-divider"></div>
                                 <a href="{{route('logout')}}" class="dropdown-item">
                                     <i class="fa fa-sign-out-alt"></i>
