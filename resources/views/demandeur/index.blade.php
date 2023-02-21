@@ -96,10 +96,11 @@
                                                 <td>En cours de traitement</td>
                                             @else
                                                 <td>Demande traitée</td>
-                                            @endif
                                                 <td>
-                                                    <a href="#" class="btn btn-sm btn-default">Imprimer</a>
+                                                    <a href="#">imprimer</a>
                                                 </td>
+                                            @endif
+                                                
                                         </tr>
                                     @endforeach
                                 </tbody>

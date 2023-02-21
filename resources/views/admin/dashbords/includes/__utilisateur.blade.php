@@ -1,7 +1,6 @@
 @extends('layout.app')
 @section('content')
-<main class="app-content">
-<div class="app-title">
+<div class="app-title" >
     <div>
         <h1><i class="fa fa-users"></i> Gestion des utilisateurs</h1>
         <p>Cet onglet permet d'afficher la gestion des utilisateurs</p>
@@ -11,10 +10,10 @@
         <li class="breadcrumb-item active"><a href="#">Accueil</a></li>
     </ul>
 </div>
-<div class="row">
+<div class="row"  style="background-color: white">
     <div class="col-md-12">
        @if (Auth::user()->hasPermission('createUser'))
-       <div class="tile">
+       <div class="title">
         <form action="{{route('users.store')}}" method="post" class="row">
         @csrf
             <div class="form-group col-md-3">
@@ -91,5 +90,4 @@
         </div>
     </div>
 </div>
-</main>
 @endsection

@@ -106,10 +106,10 @@
                                         <td>En cours de traitement</td>
                                     @else
                                         <td>Demande traitée</td>
+                                        <td>
+                                            <a href="{{route('document.attestation.pdf')}}" class="btn btn-sm btn-default">Imprimer</a>
+                                        </td>
                                     @endif
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-default">Imprimer</a>
-                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
