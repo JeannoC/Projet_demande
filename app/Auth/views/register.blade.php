@@ -54,7 +54,14 @@
             <button class="btn btn-primary btn-block" style="background: #078a36"><i class="fa fa-sign-in fa-lg fa-fw"></i>Inscription</button>
           </div>
           <br>
-          <p><a href="{{route('login')}}" style="margin-left:80px;">CONNECTEZ-VOUS</a></p>
+          <div class="row">
+            <div class="col-5">
+                <a href="{{route('front.index')}}" style="margin-left:0px;">Page d'accueil</a>
+            </div>
+            <div class="col-7">
+                <p><a href="{{route('login')}}" style="margin-left:0px;">CONNECTEZ-VOUS</a></p>
+            </div>
+          </div>
         </form>
       </div>
     </section>

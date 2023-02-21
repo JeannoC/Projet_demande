@@ -11,6 +11,9 @@
             <li class="breadcrumb-item"><a href="#">Gestion des demandes</a></li>
         </ul>
     </div>
+    @if(session()->has('error'))
+        <div class="alert alert-danger">{{session('error')}}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
@@ -43,23 +46,7 @@
                                         <td>{{$demand->demandeur->date_naissance}}</td>
                                         <td>{{$demand->demandeur->lieu_naissance}}</td>
                                         <td>
-                                            <button type="button" data-toggle="modal" data-target="#exampleModaldetail" class="btn btn-info btn-sm" type="submit"><i class="fa fa-folder-open"></i></button>
-                                            <div class="modal fade" id="exampleModaldetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModaldetail">Vous voulez affichier les details de cette demande</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                            <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info">oui</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></a>
                                         </td>
                                         <td>
                                             @if($segments=="nouveaux")
@@ -93,7 +80,7 @@
                                             <form action="{{route('admins.demande.rejeterupdate',$demand->id)}}" method="post">
                                                 @csrf
                                                 {{method_field('put')}}
-                                                <button type="button" data-toggle="modal" data-target="#exampleModalrejeter" class="btn btn-info btn-sm" type="submit">Rejeter</button>
+                                                <button type="button" data-toggle="modal" data-target="#exampleModalrejeter" class="btn btn-danger btn-sm" type="submit">Rejeter</button>
                                                 <div class="modal fade" id="exampleModalrejeter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">

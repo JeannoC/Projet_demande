@@ -37,11 +37,11 @@
                             <h3>Contacts</h3>
 
                             <ul class="contact-list">
-                                <li><span>Adresse:</span> Université Mahatma Gandhi</li>
-                                <li><span>Site web:</span> <a href="#">https://mahatmagandhi.gn/</a></li>
-                                <li><span>Email:</span> <a href="#">contact@mahatmagandhi.gn</a></li>
-                                <li><span>Phone:</span> <a href="#">6220000000</a></li>
-                                <li><span>Phone:</span> <a href="#">6200000000</a></li>
+                                <li><span>Adresse:</span> Nom Entreprise</li>
+                                <li><span>Site web:</span> <a href="#">https://nomentreprise.gn/</a></li>
+                                <li><span>Email:</span> <a href="#">contact@nomentreprise.gn</a></li>
+                                <li><span>Phone:</span> <a href="#">6000000000</a></li>
+                                <li><span>Phone:</span> <a href="#">6000000000</a></li>
                             </ul>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <ul>
-                                <li><a href="#">Yassine-Jean</a></li>
+                                <li><a href="#">Nom Entreprise</a></li>
                             </ul>
                         </div>
 
