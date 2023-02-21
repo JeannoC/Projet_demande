@@ -90,18 +90,18 @@ class DemandeController extends Controller
         public function show($id)
     {
         $demande = Demande::find($id);
-        $demandeur = $demande->demandeur->user->id;
-        $demandeurs = Demandeur::where('user_id',$demandeur)->first();
-        $document = DocumentDemandeur::where('demandeur_id',$demandeurs->id)->first();
-        $demandeNotif = new NotificationController();
-        $demandeadmin = DemandeUtilisateur::where("demande_id",$id)->get();
-        $count_demande = 0; //$demandeNotif->compteDemande();
-
+        
         if($demande)
         {
+            $demandeur = $demande->demandeur->user->id;
+            $demandeurs = Demandeur::where('user_id',$demandeur)->first();
+            $document = DocumentDemandeur::where('demandeur_id',$demandeurs->id)->first();
+            $demandeNotif = new NotificationController();
+            $demandeadmin = DemandeUtilisateur::where("demande_id",$id)->get();
+            $count_demande = 0; //$demandeNotif->compteDemande();
             return view('admin.demandes.show',compact('demande','count_demande','document','demandeadmin'));
         }else{
-            return back();
+            return back()->withError('Erreur!! ');
         }
 
     }

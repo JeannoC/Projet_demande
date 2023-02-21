@@ -11,6 +11,9 @@
             <li class="breadcrumb-item"><a href="#">Gestion des demandes</a></li>
         </ul>
     </div>
+    @if(session()->has('error'))
+        <div class="alert alert-danger">{{session('error')}}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="tile">

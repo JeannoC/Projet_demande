@@ -3,7 +3,7 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-user"></i> {{$demande->prenom ." ".$demande->name}}</h1>
+            <h1><i class="fa fa-user"></i> {{$demande->demandeur->user->prenom ." ".$demande->demandeur->user->prenom}}</h1>
             <p>Cet onglet permet d'afficher l'information d'un demande</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">

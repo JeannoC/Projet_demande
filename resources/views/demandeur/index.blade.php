@@ -9,6 +9,9 @@
                 <p class="text-warning">Votre demande est en cours traitement </p>
             @endif
         </div>
+        @if(session()->has('error'))
+            <div class="alert alert-danger">{{session('error')}}</div>
+        @endif
     </div>
 </div>
 <div class="row">
