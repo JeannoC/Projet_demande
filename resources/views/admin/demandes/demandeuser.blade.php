@@ -44,7 +44,7 @@
                                         <td>{{$demand->demande->demandeur->date_naissance}}</td>
                                         <td>{{$demand->demande->demandeur->lieu_naissance}}</td>
                                         <td>
-                                            <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info btn-md"><i class="fa fa-folder-open"></i></a>
+                                            <a href="{{route('admins.demande.show',$demand->demande->id)}}" class="btn btn-info btn-md"><i class="fa fa-folder-open"></i></a>
                                         </td>
                                     @endforeach
                                 </tbody>
