@@ -22,12 +22,13 @@
                 <div class="card-body">
                     <h2 class="text-center">Les actions sur cette demande</h2>
                     <table class="table table-striped table-bordered" id="sampleTable">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>N°</th>
-                                <th>Nom </th>
+                                <th>NOM</th>
                                 <th>PRENOM</th>
                                 <th>ACTIONS</th>
+                                <th>DATE</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -38,6 +39,10 @@
                                     <td>{{$demadmin->user->name}}</td>
                                     <td>{{$demadmin->user->prenom}}</td>
                                     <td>{{$demadmin->action}}</td>
+                                    <td>{{$demadmin->created_at}}</td>
+                                    @if ($demadmin->demande->isDismiss == true)
+                                         <td>{{$demadmin->demande->comment}}</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

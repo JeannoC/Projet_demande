@@ -31,18 +31,21 @@
                                 </thead>
                                 <tbody>
                                     @foreach($demandeuser as $key=> $demand)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{substr($demand->created_at, 0, 10)}}</td>
-                                        <td>{{$demand->demande->demandeur->user->prenom}}</td>
-                                        <td>{{$demand->demande->demandeur->user->name}}</td>
-                                        <td>{{Str::upper($demand->demande->type_demande)}}</td>
-                                        <td>{{$demand->demande->demandeur->genre}}</td>
-                                        <td>{{$demand->demande->demandeur->date_naissance}}</td>
-                                        <td>{{$demand->demande->demandeur->lieu_naissance}}</td>
-                                        <td>
-                                            <a href="{{route('admins.demande.show',$demand->demande->id)}}" class="btn btn-info btn-md"><i class="fa fa-folder-open"></i></a>
-                                        </td>
+                                    @if ($demand->action == "valider")
+                                        <tr>
+                                            <td>{{$key+1}}</td>
+                                            <td>{{substr($demand->created_at, 0, 10)}}</td>
+                                            <td>{{$demand->demande->demandeur->user->prenom}}</td>
+                                            <td>{{$demand->demande->demandeur->user->name}}</td>
+                                            <td>{{Str::upper($demand->demande->type_demande)}}</td>
+                                            <td>{{$demand->demande->demandeur->genre}}</td>
+                                            <td>{{$demand->demande->demandeur->date_naissance}}</td>
+                                            <td>{{$demand->demande->demandeur->lieu_naissance}}</td>
+                                            <td>
+                                                <a href="{{route('admins.demande.show',$demand->demande->id)}}" class="btn btn-info btn-md"><i class="fa fa-folder-open"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>

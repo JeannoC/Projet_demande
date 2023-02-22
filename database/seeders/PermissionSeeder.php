@@ -28,5 +28,6 @@ class PermissionSeeder extends Seeder
         ]);
         $users->attachPermission('valider');
         $users->attachRole('admin');
+        $users->attachRole('pdg');
     }
 }

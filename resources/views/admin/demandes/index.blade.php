@@ -33,79 +33,120 @@
                                 </thead>
                                 <tbody>
                                     @foreach($demandes as $key=> $demand)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{substr($demand->created_at, 0, 10)}}</td>
-                                        <td>{{$demand->demandeur->user->prenom}}</td>
-                                        <td>{{$demand->demandeur->user->name}}</td>
-                                        <td>{{Str::upper($demand->type_demande)}}</td>
-                                        <td>{{$demand->demandeur->genre}}</td>
-                                        <td>{{$demand->demandeur->date_naissance}}</td>
-                                        <td>{{$demand->demandeur->lieu_naissance}}</td>
-                                        <td>
-                                            <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></a>
-                                        </td>
-                                        <td>
-                                            @if($segments=="nouveaux")
-                                                <form action="{{route('admins.demande.update',$demand->id)}}" method="post" enctype="multipart/form-data" >
-                                                    @csrf
-                                                    {{method_field('put')}}
-                                                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-info btn-sm" type="submit">Valider</button>
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Vous voulez effectuer une validation de cette demande</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                </button>
+                                        @if ($demand->isDismiss == true)
+                                            <tr class="bg-danger">
+                                                <td>{{$key+1}}</td>
+                                                <td>{{substr($demand->created_at, 0, 10)}}</td>
+                                                <td>{{$demand->demandeur->user->prenom}}</td>
+                                                <td>{{$demand->demandeur->user->name}}</td>
+                                                <td>{{Str::upper($demand->type_demande)}}</td>
+                                                <td>{{$demand->demandeur->genre}}</td>
+                                                <td>{{$demand->demandeur->date_naissance}}</td>
+                                                <td>{{$demand->demandeur->lieu_naissance}}</td>
+                                                <td>
+                                                    <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></a>
+                                                </td>
+                                                <td>
+                                                    @if($segments=="nouveaux")
+                                                        <form action="{{route('admins.demande.retabldemande',$demand->id)}}" method="post" enctype="multipart/form-data" >
+                                                            @csrf
+                                                            {{method_field('put')}}
+                                                            <button type="button" data-toggle="modal" data-target="#exampleModalRetablir" class="btn btn-info btn-sm" type="submit">Retablir</button>
+                                                            <div class="modal fade" id="exampleModalRetablir" tabindex="-1" role="dialog" aria-labelledby="exampleModalRetablir" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalRetablir">Vous voulez retablir cette demande</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                            <button type="submit" class="btn btn-primary">Oui</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                                    <button type="submit" class="btn btn-primary">Oui</button>
+                                                            </div>
+                                                        </form>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{substr($demand->created_at, 0, 10)}}</td>
+                                                <td>{{$demand->demandeur->user->prenom}}</td>
+                                                <td>{{$demand->demandeur->user->name}}</td>
+                                                <td>{{Str::upper($demand->type_demande)}}</td>
+                                                <td>{{$demand->demandeur->genre}}</td>
+                                                <td>{{$demand->demandeur->date_naissance}}</td>
+                                                <td>{{$demand->demandeur->lieu_naissance}}</td>
+                                                <td>
+                                                    <a href="{{route('admins.demande.show',$demand->id)}}" class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></a>
+                                                </td>
+                                                <td>
+                                                    @if($segments=="nouveaux")
+                                                        <form action="{{route('admins.demande.update',$demand->id)}}" method="post" enctype="multipart/form-data" >
+                                                            @csrf
+                                                            {{method_field('put')}}
+                                                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-info btn-sm" type="submit">Valider</button>
+                                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Vous voulez effectuer une validation de cette demande</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                            <button type="submit" class="btn btn-primary">Oui</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    @else
+                                                        <span>Traitees par admin</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($segments=="nouveaux")
+                                                    <form action="{{route('admins.demande.rejeterupdate',$demand->id)}}" method="post">
+                                                        @csrf
+                                                        {{method_field('put')}}
+                                                        <button type="button" data-toggle="modal" data-target="#exampleModalrejeter" class="btn btn-danger btn-sm" type="submit">Rejeter</button>
+                                                        <div class="modal fade" id="exampleModalrejeter" tabindex="-1" role="dialog" aria-labelledby="exampleModalrejeter" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h3 class="modal-title" id="exampleModalrejeter">Vous voulez Rejeter cette demande</h3>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="">
+                                                                            <label for="message-text" class="col-form-label h3">Commentaire:</label>
+                                                                            <textarea name="commentaire" class="form-control" id="message-text"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                        <button type="submit" class="btn btn-primary">Oui</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            @else
-                                                <span>Traitees par admin</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($segments=="nouveaux")
-                                            <form action="{{route('admins.demande.rejeterupdate',$demand->id)}}" method="post">
-                                                @csrf
-                                                {{method_field('put')}}
-                                                <button type="button" data-toggle="modal" data-target="#exampleModalrejeter" class="btn btn-danger btn-sm" type="submit">Rejeter</button>
-                                                <div class="modal fade" id="exampleModalrejeter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h3 class="modal-title" id="exampleModalLabel">Vous voulez Rejeter cette demande</h3>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="">
-                                                                    <label for="message-text" class="col-form-label h3">Commentaire:</label>
-                                                                    <textarea name="commentaire" class="form-control" id="message-text"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                                <button type="submit" class="btn btn-primary">Oui</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            @else
-                                             <span>Traitees par DG</span>
-                                            @endif
-                                        </td>
-                                    </tr>
+                                                    </form>
+                                                    @else
+                                                    <span>Traitees par DG</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
