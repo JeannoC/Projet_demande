@@ -24,34 +24,22 @@
         <h1>Nom Entreprise</h1>
       </div>
       <div class="login-box" >
-        <form  class="login-form" action="{{route('login')}}"  method="POST">
-            @csrf
-          <h3 class="login-head">AUTHENTIFICATION</h3>
+        <form  class="login-form" action="{{ route('recuperationpassword') }}"  method="POST">
+            {{@csrf_field()}}
+          <h3 class="login-head">Trouver votre Compte <br> Entrez votre gmail </h3>
           @if(session()->has('error'))
             <div class="alert alert-danger">{{session('error')}}</div>
           @endif
           <div class="form-group">
-            <label class="control-label">EMAIL</label>
-            <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" type="text" name="email" autofocus>
-            @error('email')<span class="text text-danger">{{$message}}</span>@enderror
-          </div>
-          <div class="form-group">
-            <label class="control-label">MOT DE PASSE</label>
-            <input class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" type="password" name="password">
-            @error('password')<span class="text text-danger">{{$message}}</span>@enderror
+            <label class="control-label">Email</label>
+            <input class="form-control @error('password_confirmation') is-invalid @enderror" value="{{ old('email') }}" type="text" name="email">
+            @error('password_confirmation')<span class="text text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block" style="background: #078a36"><i class="fa fa-sign-in fa-lg fa-fw"></i>CONNEXION</button>
+            <button class="btn btn-primary btn-block" type="submit" style="background: #078a36"><i class="fa fa-sign-in fa-lg fa-fw"></i>Suivants</button>
           </div>
           <p>
           </p>
-          <div class="row">
-           <div class="col-3"></div>
-           <div class="col-8">
-             <a href="{{route('passwordoublier')}}">Mode passe oublier</a>
-           </div>
-           <div class="col-1"></div>
-          </div>
           <div class="row">
             <div class="col-6">
                 <a href="{{route('front.index')}}" style="margin-left:10px;">Page d'accueil</a>

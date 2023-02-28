@@ -19,8 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('prenom');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->default("");
+            $table->string('token')->default("");
+            $table->dateTime('token_validated_at')->nullable();
+            $table->dateTime('token_confirmated_at')->nullable();
             $table->integer('statuts')->enum(0,1)->default(0);
+            $table->text('avatar')->default('avatar.jpg');
             $table->rememberToken();
             $table->timestamps();
         });

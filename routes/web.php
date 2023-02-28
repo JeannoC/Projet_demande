@@ -21,6 +21,8 @@ use App\Models\Demande;
 |
 */
 Route::get('/mail/{id}', [MailController::class, 'index'])->name('mailing');
+Route::get('/pwdconfirm/{token}', [MailController::class, 'pwdconfirm'])->name('pwdconfirmmailing');
+Route::get('/pwdoublier/{token}', [MailController::class, 'pwdoublier'])->name('pwdoubliermailing');
 
 Route::get('/tpl', function(){
     $app_name = env('APP_NAME','');
@@ -78,6 +80,14 @@ Route::group(["namespace" => "Auth"], function(){
     Route::post('/register',[AuthController::class,'create'])->name('register');
     Route::get('/logout',[AuthController::class,'logout'])->name('logout')->middleware("auth");
     Route::get('/adddemande',[AuthController::class,'adddemande'])->name('adddemande')->middleware("auth");
+
+    Route::get('/password/confirmation/{token}',[UtilisateurController::class, 'passwordconfirmation_get'])->name('passwordconfirmation.get');
+    Route::put('/passwordconfirmation/{token}',[AuthController::class,'passwordconfirmation_put'])->name('passwordconfirmation.put');
+    
+    Route::get('/passwordoublier',[UtilisateurController::class, 'passwordoublier'])->name('passwordoublier');
+    Route::post('/passwordoubliers',[UtilisateurController::class, 'recuperationpassword'])->name('recuperationpassword');
+    
+    Route::get('actualiserinscription/{id}',[UtilisateurController::class, 'actualiserinscription'])->name('actualiserinscription');
 });
 
 

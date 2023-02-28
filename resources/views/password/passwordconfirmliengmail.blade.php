@@ -24,33 +24,14 @@
         <h1>Nom Entreprise</h1>
       </div>
       <div class="login-box" >
-        <form  class="login-form" action="{{route('login')}}"  method="POST">
-            @csrf
-          <h3 class="login-head">AUTHENTIFICATION</h3>
-          @if(session()->has('error'))
-            <div class="alert alert-danger">{{session('error')}}</div>
-          @endif
-          <div class="form-group">
-            <label class="control-label">EMAIL</label>
-            <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" type="text" name="email" autofocus>
-            @error('email')<span class="text text-danger">{{$message}}</span>@enderror
+        <div  class="login-form">
+          <div class="alert-info" style="border-radus:8px">
+              <p class="login-head" style="padding:15px">Nous allons vous envoyez un lien via gmail pour completer la creation de votre compte</p>
           </div>
           <div class="form-group">
-            <label class="control-label">MOT DE PASSE</label>
-            <input class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" type="password" name="password">
-            @error('password')<span class="text text-danger">{{$message}}</span>@enderror
-          </div>
-          <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block" style="background: #078a36"><i class="fa fa-sign-in fa-lg fa-fw"></i>CONNEXION</button>
-          </div>
-          <p>
-          </p>
-          <div class="row">
-           <div class="col-3"></div>
-           <div class="col-8">
-             <a href="{{route('passwordoublier')}}">Mode passe oublier</a>
-           </div>
-           <div class="col-1"></div>
+              <label for="">{{ $nom }}  {{ $name }}</label>
+            <h5 class="control-label"> Est envoyer à ce mail</h5>
+            <label class="control-label">{{ $email }}</label>
           </div>
           <div class="row">
             <div class="col-6">
@@ -60,7 +41,7 @@
                 <a href="{{route('register.incription')}}" style="margin-left:0px;">Créer votre compte</a>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </section>
     <!-- Essential javascripts for application to work-->

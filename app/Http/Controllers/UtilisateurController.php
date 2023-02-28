@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\NotificationController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 class UtilisateurController extends Controller
 {
@@ -31,6 +32,7 @@ class UtilisateurController extends Controller
             $user->prenom=$request->prenom;
             $user->email=$request->email;
             $user->password=bcrypt($request->password);
+            $user->avatar="avatar.jpg";
             $user->save();
             $user->attachRole('admin');
             toastr()->success("Création du compte effectuée avec success");
@@ -38,9 +40,46 @@ class UtilisateurController extends Controller
 
         }
     }
+    public function passwordconfirmation_get($token){
+        $user=User::where('token',$token)->first();
+        $date_auj = Carbon::now();
+        $create_date = Carbon::parse($user->token_validated_at);
+        $date_dif = $create_date->diffInSeconds($date_auj);
+        $email = $user->email;
+        return view('password.passwordcofirme', compact('token','date_dif','user','email'));
+    }
+
+    public function passwordoublier(){
+        return view('password.passwordoublier');
+    }
     public function inscription(){
         return view('Auth::register');
     }
+    public function recuperationpassword(Request $request){
+
+        $validation = Validator::make($request->all(),[
+            'email' => 'bail|required|email|max:255',
+        ]);
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+        else{
+            $email=$request->email;
+            $user=User::where('email',$email)->first();
+            $user->token_validated_at = Carbon::now();
+            $user->update();
+            $token = $user->token;
+            return redirect()->route('pwdoubliermailing',$token);
+        }
+    }
+    
+    public function actualiserinscription($id){
+        $user=User::FindOrFail($id);
+        $user->token_validated_at = Carbon::now();
+        $user->save();
+        return back();
+    }
+
     public function suspendre($id)
     {
         $users=User::FindOrFail($id);
