@@ -208,6 +208,12 @@ class DemandeController extends Controller
 
     }
 
+    public function paiement($id){
+
+        $demande=Demande::FindOrFail($id);
+        return view('paiement.form',compact('demande'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -46,7 +46,9 @@ Route::group(["namespace" => "front"], function(){
     Route::post('/demande/laisserpasser', [DemandeController::class,'storepasser'])->name("demande.laisserpasser")->middleware("auth");
     Route::post('/demande/document', [DocumentDemandeurController::class,'store'])->name("demande.document")->middleware("auth");
     Route::get('/demande/detail/document', [DocumentDemandeurController::class,'show'])->name("demande.detail.document")->middleware("auth");
-    Route::get('/document',[DocumentDemandeurController::class,'voirdocument'])->name("document.attestation.pdf")->middleware("auth");;
+    Route::get('/document',[DocumentDemandeurController::class,'voirdocument'])->name("document.attestation.pdf")->middleware("auth");
+
+    Route::get('/paiement/{id}', [DemandeController::class, 'paiement'])->name("paiement.form")->middleware("auth");
 });
 
 Route::group(["namespace" => "admins"], function(){
@@ -83,10 +85,10 @@ Route::group(["namespace" => "Auth"], function(){
 
     Route::get('/password/confirmation/{token}',[UtilisateurController::class, 'passwordconfirmation_get'])->name('passwordconfirmation.get');
     Route::put('/passwordconfirmation/{token}',[AuthController::class,'passwordconfirmation_put'])->name('passwordconfirmation.put');
-    
+
     Route::get('/passwordoublier',[UtilisateurController::class, 'passwordoublier'])->name('passwordoublier');
     Route::post('/passwordoubliers',[UtilisateurController::class, 'recuperationpassword'])->name('recuperationpassword');
-    
+
     Route::get('actualiserinscription/{id}',[UtilisateurController::class, 'actualiserinscription'])->name('actualiserinscription');
 });
 

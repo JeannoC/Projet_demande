@@ -93,6 +93,7 @@
                                 <th>Type Demande</th>
                                 <th>Date Demande</th>
                                 <th>Status</th>
+                                <th>Paiemant</th>
                                 <th>action</th>
                             </thead>
                             <tbody>
@@ -104,6 +105,7 @@
                                     <td>{{$demande->created_at}}</td>
                                     @if($demande->isValidated == null)
                                         <td>En cours de traitement</td>
+                                        <td> <a href="{{route('paiement.form', $demande->id)}}" class="btn btn-sm btn-default">Payer</a></td>
                                     @else
                                         <td>Demande traitée</td>
                                         <td>
