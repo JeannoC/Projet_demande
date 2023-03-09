@@ -8,17 +8,15 @@
     h1{
         text-align: center;
     }
-    .directeur{
-        text-align: center;
-    }
     .patro{
         font-style: bold;
     }
     .contenu{
         padding: 20px;
     }
-    .general{
-        margin-top: 400px;
+    .generale{
+       margin-top : 450px;
+       text-align: center;
     }
     @page { margin: 0.5cm; }
 
@@ -30,7 +28,7 @@
 <body>
    <div class="contenu">
     <h1>{{Str::upper( $demande->type_demande)}}</h1>
-    <h1>{{Str::upper($date)}}</h1>
+    <h6 style="text-align: center">{{Str::upper($date)}}</h6>
         <p>Nous Nom Entreprise </p>
         <p><strong>NOM :</strong> {{$users->name}}</p>
         <p><strong>PRENOM :</strong> {{$users->prenom}}</p>
@@ -39,9 +37,11 @@
         <br><br><br>
         <p>En foi de quoi, nous lui délivrons la présente attestation pour servir et valoir de ce que de droit</p>
         <p class="lieu"> Fait le {{ $demande->validated_at }} à Conakry</p>
-        <h1 class="general">DIRECTEUR GENERAL</h1>
-         <p class="directeur">Photo signature</p>
-         <h1 style="text-decoration: underline">NOM PRENOM DIRECTEUR</h1>
+        <div class="generale">
+            <h6 >DIRECTEUR GENERAL</h6>
+             <p >Photo signature</p>
+             <h6 style="text-decoration: underline">NOM PRENOM DIRECTEUR</h6>
+        </div>
    </div>
 
 </body>

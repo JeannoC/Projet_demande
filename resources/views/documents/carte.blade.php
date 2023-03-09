@@ -16,7 +16,7 @@
       }
       .img-content {
         border-radius: 10%;
-        margin: 15px;
+        margin-right: 15px;
         float: left;
         width: auto;
         height: 100%;

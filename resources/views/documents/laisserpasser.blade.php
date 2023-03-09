@@ -22,19 +22,24 @@
         float: right;
         margin-right: 100px;
       }
-      .logo{
-        width : auto;
-        height : 40px;
+        .photo img{
+        width: 250px;
+        height: 200px;
         border-radius: 1%;
-        margin-bottom : 20px;
-        background-color:rgba(9, 9, 240, 0.5);
       }
+
+      .photo .signature{
+        width: 150px;
+        height: 130px;
+      }
+ 
       h1{
         text-align: center;
         margin-bottom : 100px
     }
     .generale{
-       margin-top : 330px;
+       margin-top : 450px;
+       text-align: center;
     }
 
     .directeur{
@@ -45,15 +50,14 @@
         </style>
 </head>
 <body>
-    <div class="logo">
-      </div>
     <div class="contenu">
         <h1>{{Str::upper( $demande->type_demande)}}</h1>
        </div>
    <div class="activity-container">
                      <div class="photo">
                         <img src="{{$pic[0]}}" alt="ma photo" width="300;" heigth="250;"/>
-                        <img src="{{$pic[1]}}" alt="ma photo" width="300;" heigth="200;"/>
+                        <p>Signature du titulaire</p>
+                        <img src="{{$pic[1]}}" alt="ma photo" width="300;" heigth="200;" class="signature"/>
                         <p><strong>DELIVRANCE LE :</strong> {{$demande->validated_at}}</p>
                         <p>Durée du laisser-passer 90 jours</p>
                     </div>
@@ -68,9 +72,9 @@
       </div>
     </div>
     <div class="generale">
-        <h1 class="general">DIRECTEUR GENERAL</h1>
+        <h6 class="general">DIRECTEUR GENERAL</h6>
          <p class="directeur">Photo signature</p>
-         <h1 style="text-decoration: underline">NOM PRENOM DIRECTEUR</h1>
+         <h6 style="text-decoration: underline">NOM PRENOM DIRECTEUR</h6>
     </div>
 </body>
 </html>
