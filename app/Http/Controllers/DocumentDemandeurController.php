@@ -46,6 +46,8 @@ class DocumentDemandeurController extends Controller
             return $pdf->download($demande->type_demande.'.pdf');
         }
 
+        // return view('documents.carte',compact('demande','users','pic','doc'));
+
     }
 
 
