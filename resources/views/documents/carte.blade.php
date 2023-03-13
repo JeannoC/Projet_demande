@@ -6,79 +6,66 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
-
-
-       @page {
-         size: 9.4cm 9cm;
-         margin: 5; 
-    }
-    .activity-container{
+      .contenaire{
+        height: 20%;
+      }
+      .activity-container {
         display: flex;
-        justify-content: flex-end;
+        flex-direction:row;
+        justify-content: flex-start;
       }
-      .activity-text {
-        text-align: center;
-        text-align : left;
-      }
-
-      .photo {
-        width: 60px;
-        height: 200px;
+      .img-content {
         border-radius: 10%;
+        margin-right: 15px;
         float: left;
-        margin-right: 100px;
+        width: auto;
+        height: 100%;
+      }
+      .img {
+        border-radius: 5px;
+        border: 1px solid #f5f5f5;
+        padding: 3px;
       }
 
-      .photo img{
-        width: 80px;
-        height: 80px;
-        border-radius: 1%;
+      p {
+        margin:0;
       }
 
-      .photo .signature{
-        width: 90px;
-        height: 30px;
+      .title{
+        text-align: left;
+        padding-left: 170px;
       }
- 
-      .contenu{
-        text-align: center;
-    }
-    .general{
-       margin-top : 40px;
-    }
-        span{
-            font-size: 8px;
-            font-style: bold;
-        }
-        p{
-            font-size: 8px;
-        }
-        </style>
+      
+
+    @page { margin: 0.5cm; }
+  </style>
 </head>
 <body>
-    <div class="contenu">
-        <h5>{{Str::upper( $demande->type_demande)}}</h5>
-       </div>
-   <div class="activity-container">
-                     <div class="photo">
-                        <img src="{{$pic[0]}}" alt="ma photo" width="80;" heigth="80;"/>
-                        <p>Signature du titulaire</p>
-                        <img src="{{$pic[1]}}" alt="ma photo signature" width="50;" heigth="30;" class="signature"/>
-                        <p><span>DELIVRE :</span> {{$demande->validated_at}}</p>
-                        <p><span>EXPIRE :</span> {{date('Y-m-d', strtotime($demande->validated_at. ' + 2 years'));}}</p>
-                    </div>
-      <div class="activity-text">
-                    <p><span>NOM :</span> {{$users->name}}</p>
-                    <p><span>PRENOM :</span> {{$users->prenom}}</p>
-                    <p><span>DATE DE NAISSANCE :</span> {{$demande->demandeur->date_naissance}}</p>
-                    <p><span>LIEU DE NAISSANCE :</span> {{$demande->demandeur->lieu_naissance}}</p>
-                    <p><span>SEXE :</span> {{$demande->demandeur->genre}}</p>
-                    <p><span>ADRESSE :</span> {{$demande->demandeur->adresse}}</p>
-                    <p><span>TAILLE :</span> {{$demande->demandeur->taille}}</p>
+    <div class="contenaire">
+      <div class="title">
+        <h1>{{Str::upper( $demande->type_demande)}}</h1>
       </div>
-    </div>
-    <div class="general">
-        <p style="text-align:center;">Signature et cachet du directeur générel</p>
+      <div class="activity-container">
+        <div class="img-content">
+          <img src="{{$pic[0]}}" class="img" alt="ma photo" width="100px"/>
+          <!-- @foreach ($pic as $pics)
+          @endforeach -->
+          <!-- <p><strong>DATE DE DELIVRANCE :</strong> {{$demande->validated_at}}</p>
+          <p><strong>DATE D'EXPIRATION :</strong> {{date('Y-m-d', strtotime($demande->validated_at. ' + 2 years'));}}</p> -->
+        </div>
+        <div class="content-info">
+          <p><strong>NOM :</strong> {{$users->name}}</p>
+          <p><strong>PRENOM :</strong> {{$users->prenom}}</p>
+          <p><strong>DATE DE NAISSANCE :</strong> {{$demande->demandeur->date_naissance}}</p>
+          <p><strong>LIEU DE NAISSANCE :</strong> {{$demande->demandeur->lieu_naissance}}</p>
+          <p><strong>SEXE :</strong> {{$demande->demandeur->genre}}</p>
+          <p><strong>ADRESSE :</strong> {{$demande->demandeur->adresse}}</p>
+          <p><strong>TAILLE :</strong> {{$demande->demandeur->taille}}</p>
+          <div class="general">
+              <p style="text-align:left;">Signature et cachet du directeur générel</p>
+          </div>
+        </div>
+      </div>
     </div>
 </body>
 </html>
